@@ -22,13 +22,36 @@
     font-weight: 500;
 }
 
-.home-card-content {
-
-}
-
-#login-form {
+#signup-container {
     width: 35%;
+    height: 600px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
+    top: 100px;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+#signup-container h2 {
+    margin-top: 15px;
+}
+
+#signup-form {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+}
+
+input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
