@@ -15,11 +15,19 @@
 
 .home-card {
     margin-bottom: 20px;
+    transition: opacity .5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateX(-25px);
+    opacity: 0;
 }
 
 .home-card-title {
     margin: 0;
     font-weight: 500;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 #signup-container {
@@ -28,25 +36,27 @@
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     top: 100px;
-    z-index: -1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    z-index: 1;
 }
 
-#signup-container h2 {
-    margin-top: 15px;
+#signup-container h3 {
+    margin-top: 25px;
+}
+
+#signup-container h3, #signup-container p {
+    margin-left: 5%;
 }
 
 #signup-form {
     margin-top: 15px;
+    margin: auto;
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 90%;
 }
 
-input[type=email], input[type=password] {
+input[type=email], input[type=password], input[type=text] {
     width: 100%;
     padding: 12px 20px;
     border-radius: 4px;
