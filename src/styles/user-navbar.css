@@ -1,0 +1,39 @@
+.user-nav-container {
+    width: 5%;
+    background-color: beige;
+    height: 100vh;
+}
+
+.user-nav {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.user-nav-hr {
+    border: 1px solid black; 
+    width: 80%; 
+    margin: 10px auto; 
+}
+
+.user-nav-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    aspect-ratio: 1/1;
+}
+
+.user-nav-link {
+    color: black;
+}
+
+.user-nav-link:hover {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+.user-nav-link i {
+    margin: auto;
+    font-size: 1.25rem;
+}

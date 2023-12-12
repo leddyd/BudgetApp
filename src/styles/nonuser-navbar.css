@@ -1,4 +1,4 @@
-.navbar {
+.nonuser-navbar {
     top: 3%;
     width: 75%;
     margin: auto;
@@ -13,19 +13,19 @@
     width: 90%;
 }
 
-.nav-link {
+.nonuser-nav-link {
     color: black;
     margin-right: 10px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-.nav-link:hover {
+.nonuser-nav-link:hover {
     background-color: #f1f1f1;
     color: black;
 }
 
-.navbar-brand {
+.nonuser-navbar-brand {
     margin-right: 50px;
 }
 

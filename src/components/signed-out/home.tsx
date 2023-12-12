@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
+import { Warning } from "../../utils/formEvents";
 
 function RenderHome() {
     const cards = [
@@ -43,10 +44,15 @@ function RenderHome() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [warningMsg, SetWarningMsg] = React.useState<string | null>(null);
 
     const handleSubmit = (e:any) => {
         e.preventDefault();
         console.log({firstName, lastName, email, password, confirmPassword});
+
+        if (password !== confirmPassword) {
+            SetWarningMsg('Passwords do not match');
+        }
     };
 
     return (
@@ -106,10 +112,11 @@ function RenderHome() {
                             required 
                         /><br></br>
                         <input 
-                            type="submit" 
+                            type="submit"
                             value="Submit"
                         />
                     </form>
+                    {warningMsg && <Warning msg={warningMsg} />}
                 </div>
             </div>
             <div>

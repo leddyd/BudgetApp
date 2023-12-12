@@ -1,5 +1,8 @@
 body {
     background-color: #c5f9d7;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 i {
@@ -17,4 +20,24 @@ i {
     padding-top: 8px;
     padding-bottom: 8px;
     color: white;
+}
+
+.alert {
+    width: 90%;
+    margin: auto;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.btn-close {
+    transform: translateY(-10%);
+    font-size: .75em;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }

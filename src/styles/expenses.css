@@ -1,0 +1,48 @@
+.expenses-container {
+    width: 95vw;
+    height: 100vh;
+}
+
+.header-container {
+    width: 91vw;
+    margin-left: 2vw;
+    height: 14vh;
+}
+
+.summary-container {
+    width: 91vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
+    height: 24vh;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.viz-container {
+    width: 91vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
+    height: 54vh;
+    border-radius: 8px;
+    display: flex;
+}
+
+.viz-card {
+    height: 100%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.chart {
+    width: 42%;
+    margin-right: 2%;
+}
+
+.expenses {
+    width: 30%;
+    margin-right: 2%;
+}
+
+.categories {
+    width: 25%;
+}

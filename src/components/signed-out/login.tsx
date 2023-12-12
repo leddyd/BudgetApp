@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import { brandEnter, brandLeave } from "../utils/mouseEvents"
+import { brandEnter, brandLeave } from "../../utils/mouseEvents"
 
 function RenderLogin() {
     const [email, setEmail] = useState('')
