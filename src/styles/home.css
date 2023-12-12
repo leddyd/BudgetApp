@@ -64,4 +64,17 @@ input[type=email], input[type=password], input[type=text] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-  }
+}
+
+input[type=submit] {
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    color: white;
+    border: none;
+    background-color: #8f33ff;
+    font-weight: 500;
+}

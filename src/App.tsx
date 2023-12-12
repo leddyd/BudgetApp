@@ -3,15 +3,20 @@ import RenderAlert from "./components/alert"
 import RenderNavbar from "./components/navbar"
 import RenderHome from "./components/home"
 import React from "react"
+import RenderLogin from "./components/login"
 
 function App() {
   return (
     <>
-      <RenderAlert />
-      <RenderNavbar />
       <Routes>
-        <Route path="/" element={<RenderHome />} />
-        
+        <Route path="/" element={
+          <>
+            <RenderAlert />
+            <RenderNavbar />
+            <RenderHome />
+          </>
+        } />
+        <Route path="/login" element={<RenderLogin />} />
       </Routes>
     </>
   )
