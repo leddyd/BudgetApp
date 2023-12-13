@@ -7,6 +7,7 @@
     margin-top: 5%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 #home-text-container {
@@ -32,11 +33,12 @@
 
 #signup-container {
     width: 35%;
-    height: 600px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     top: 100px;
     z-index: 1;
+    box-sizing: content-box;
+
 }
 
 #signup-container h3 {
@@ -56,14 +58,8 @@
     width: 90%;
 }
 
-input[type=email], input[type=password], input[type=text] {
+.form-floating {
     width: 100%;
-    padding: 12px 20px;
-    border-radius: 4px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 input[type=submit] {
@@ -77,4 +73,6 @@ input[type=submit] {
     border: none;
     background-color: #8f33ff;
     font-weight: 500;
+    margin-bottom: 25px;
+    margin-top: 10px;
 }

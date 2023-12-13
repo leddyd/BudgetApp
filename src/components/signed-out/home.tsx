@@ -76,41 +76,66 @@ function RenderHome() {
                     <h3>Create an account</h3>
                     <p>Start managing your finances by filling out the form below.</p>
                     <form id="signup-form" onSubmit={handleSubmit}>
-                        <input 
-                            type="text" 
-                            placeholder="First Name" 
-                            value={firstName} 
-                            onChange={(e) => setFirstName(e.target.value)} 
-                            required 
-                        />
-                        <input 
-                            type="text" 
-                            placeholder="Last Name" 
-                            value={lastName} 
-                            onChange={(e) => setLastName(e.target.value)} 
-                            required 
-                        />
-                        <input 
-                            type="email" 
-                            placeholder="Email" 
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}  
-                            required 
-                        />
-                        <input 
-                            type="password" 
-                            placeholder="Password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
-                        />
-                        <input 
-                            type="password" 
-                            placeholder="Confirm Password" 
-                            value={confirmPassword} 
-                            onChange={(e) => setConfirmPassword(e.target.value)} 
-                            required 
-                        /><br></br>
+                        <div className="form-floating mb-3">
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                placeholder="First Name" 
+                                id="floatingFirstName" 
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)} 
+                                required 
+                            />
+                            <label htmlFor="floatingFirstName">First Name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input 
+                                className="form-control" 
+                                id="floatingLastName"
+                                type="text" 
+                                placeholder="Last Name" 
+                                value={lastName} 
+                                onChange={(e) => setLastName(e.target.value)} 
+                                required 
+                            />
+                            <label htmlFor="floatingLastName">Last Name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input 
+                                className="form-control"
+                                id="floatingEmail"
+                                type="email" 
+                                placeholder="Email" 
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}  
+                                required 
+                            />
+                            <label htmlFor="floatingEmail">Email</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input 
+                                className="form-control"
+                                id="floatingPassword"
+                                type="password" 
+                                placeholder="Password" 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)} 
+                                required 
+                            />
+                            <label htmlFor="floatingPassword">Password</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input 
+                                className="form-control"
+                                id="floatingConfirmPassword"
+                                type="password" 
+                                placeholder="Confirm Password" 
+                                value={confirmPassword} 
+                                onChange={(e) => setConfirmPassword(e.target.value)} 
+                                required 
+                            />
+                            <label htmlFor="floatingConfirmPassword">Confirm Password</label>
+                        </div>
                         <input 
                             type="submit"
                             value="Submit"

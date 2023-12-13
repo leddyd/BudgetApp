@@ -20,20 +20,30 @@ function RenderLogin() {
             </div>
             <div className="login-form">
                 <form id="signup-form" onSubmit={handleSubmit}>
-                    <input 
-                        type="email" 
-                        placeholder="Email" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}  
-                        required 
-                    />
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)} 
-                        required 
-                    />
+                    <div className="form-floating mb-3">
+                        <input
+                            className="form-control" 
+                            type="email" 
+                            placeholder="Email" 
+                            id="floatingEmail"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}  
+                            required 
+                        />
+                        <label htmlFor="floatingEmail">Email</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input 
+                            className="form-control"
+                            id="floatingPassword"
+                            type="password" 
+                            placeholder="Password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
+                        <label htmlFor="floatingPassword">Password</label>
+                    </div>
                     <br></br>
                     <input 
                         type="submit" 
