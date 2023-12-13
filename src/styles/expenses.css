@@ -17,6 +17,7 @@
     border-radius: 8px;
     display: flex;
     padding: 25px;
+    padding-left: 40px;
 }
 
 .balance-container {
