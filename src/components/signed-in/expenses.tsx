@@ -30,13 +30,13 @@ function RenderExpenses() {
             </div>
             <div className="viz-container">
                 <div className="viz-card chart hidden">
-                    <div className='navbar navbar-expand-lg bg-body-tertiary'>
+                    <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
                             <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Expenses</p>
                             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
-                                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a className="nav-link dropdown-toggle " href="#" role="button" aria-expanded="false">
                                             Month
                                         </a>
                                         <ul className="dropdown-menu dropdown-menu-end">

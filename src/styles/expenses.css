@@ -1,21 +1,22 @@
 .expenses-container {
-    width: 95vw;
-    height: 100vh;
+    width: 95%;
+    min-height: 100vh;
+    padding-left: 10px;
 }
 
 .header-container {
-    width: 91vw;
-    margin-left: 2vw;
-    height: 14vh;
+    width: 96%;
+    margin-left: 2%;
+    height: 14%;
 }
 
 .summary-container {
-    width: 91vw;
-    margin-left: 2vw;
-    margin-top: 1vw;
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 1vh;
     background-color: white;
     border-radius: 8px;
-    display: flex;
+    display: flex;  
     padding: 25px;
     padding-left: 40px;
 }
@@ -47,10 +48,10 @@
 }
 
 .viz-container {
-    width: 91vw;
-    margin-left: 2vw;
+    width: 96%;
+    margin-left: 2%;
     margin-top: 1vw;
-    height: 54vh;
+    height: 50%;
     border-radius: 8px;
     display: flex;
 }
@@ -69,6 +70,30 @@
 .expenses {
     width: 30%;
     margin-right: 2%;
+}
+
+.dropdown-menu {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 5px;
+    transition: visibility 0.25s, opacity 0.25s, margin-top .25s;
+}
+
+.dropdown:hover .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+    margin-top: 0px;
+}
+
+.dropdown:hover .dropdown-toggle::after,
+.dropdown:hover .dropdown-menu::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-toggle::after,
+.dropdown-menu::after {
+    transition: 0.7s;
 }
 
 .categories {

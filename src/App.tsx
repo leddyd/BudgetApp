@@ -19,6 +19,11 @@ function App() {
           </>
         } />
         <Route path="/login" element={<RenderLogin />} />
+        <Route path="/profile" element={
+          <div className="main-container">
+            <RenderUserNavbar />
+          </div>
+        } />
         <Route path="/expenses" element={
           <div className="main-container">
             <RenderUserNavbar />
