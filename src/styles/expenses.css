@@ -1,7 +1,8 @@
 .expenses-container {
-    width: 95%;
+    width: 100%;
     min-height: 100vh;
     padding-left: 10px;
+    overflow-y: auto;
 }
 
 .header-container {
@@ -51,7 +52,7 @@
     width: 96%;
     margin-left: 2%;
     margin-top: 1vw;
-    height: 50%;
+    min-height: 50%;
     border-radius: 8px;
     display: flex;
 }
@@ -62,6 +63,14 @@
     border-radius: 8px;
 }
 
+.chart-container {
+    margin: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .chart {
     width: 42%;
     margin-right: 2%;
@@ -70,6 +79,18 @@
 .expenses {
     width: 30%;
     margin-right: 2%;
+}
+
+.list-group {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.list-group li {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin-left: 10px;
 }
 
 .dropdown-menu {

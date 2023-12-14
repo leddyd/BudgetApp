@@ -1,4 +1,16 @@
+import PieChart from '../charts/expensePieChart';
 import ProgressBar from '../charts/progressBar';
+
+interface Datum {
+    label: string;
+    value: number;
+}
+
+const data: Datum[] = [
+    { label: 'Category 1', value: 30 },
+    { label: 'Category 2', value: 50 },
+    { label: 'Category 3', value: 20 },
+];
 
 function RenderExpenses() {
     return (
@@ -32,7 +44,7 @@ function RenderExpenses() {
                 <div className="viz-card chart hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
-                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Expenses</p>
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Expense Summary</p>
                             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
@@ -50,10 +62,41 @@ function RenderExpenses() {
                             </div>
                         </div>
                     </div>
+                    <div className='chart-container'>
+                        <PieChart data={data} width={300} height={300} />
+                    </div>
                 </div>
-                <div className="viz-card expenses hidden"></div>
+                <div className="viz-card expenses hidden">
+                    <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
+                        <div className="container-fluid">
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Payments</p>
+                        </div>
+                    </div>
+                    <ol className="list-group">
+                        <li className="list-group-item d-flex justify-content-between align-items-start">
+                            <div className="ms-2 me-auto">
+                            <div className="fw-bold">Subheading</div>
+                            Content for list item
+                            </div>
+                            <span className="badge bg-primary rounded-pill">Sent $131</span>
+                        </li>
+                        <li className="list-group-item d-flex justify-content-between align-items-start">
+                            <div className="ms-2 me-auto">
+                            <div className="fw-bold">Subheading</div>
+                            Content for list item
+                            </div>
+                        </li>
+                        <li className="list-group-item d-flex justify-content-between align-items-start">
+                            <div className="ms-2 me-auto">
+                            <div className="fw-bold">Subheading</div>
+                            Content for list item
+                            </div>
+                        </li>
+                    </ol>
+                </div>
                 <div className="viz-card categories hidden"></div>
             </div>
+            <div className='footer'>hello</div>
         </div>
     );
 }
