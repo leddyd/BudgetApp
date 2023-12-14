@@ -15,8 +15,8 @@ const data: Datum[] = [
 function RenderExpenses() {
     return (
         <div className="expenses-container">
-            <div className="header-container">
-                {/* Add content here if needed */}
+            <div className="header-container hidden">
+                <p className='mb-0 fs-4 text-body-emphasis fw-medium text-muted'>This Month's History</p>
             </div>
             <div className="summary-container hidden">
                 <div className="balance-container">
@@ -49,7 +49,7 @@ function RenderExpenses() {
                                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle " href="#" role="button" aria-expanded="false">
-                                            Month
+                                            December
                                         </a>
                                         <ul className="dropdown-menu dropdown-menu-end">
                                             <li><a className="dropdown-item" href="#">Action</a></li>
@@ -72,31 +72,81 @@ function RenderExpenses() {
                             <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Payments</p>
                         </div>
                     </div>
-                    <ol className="list-group">
-                        <li className="list-group-item d-flex justify-content-between align-items-start">
-                            <div className="ms-2 me-auto">
-                            <div className="fw-bold">Subheading</div>
-                            Content for list item
-                            </div>
-                            <span className="badge bg-primary rounded-pill">Sent $131</span>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-start">
-                            <div className="ms-2 me-auto">
-                            <div className="fw-bold">Subheading</div>
-                            Content for list item
-                            </div>
-                        </li>
-                        <li className="list-group-item d-flex justify-content-between align-items-start">
-                            <div className="ms-2 me-auto">
-                            <div className="fw-bold">Subheading</div>
-                            Content for list item
-                            </div>
-                        </li>
-                    </ol>
+                    <div className='expenses-list-group-container'>
+                        <ol className="list-group">
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="expense-category-indicator"></div>
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                                <span className="badge income rounded-pill">Sent $131</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="expense-category-indicator"></div>
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="expense-category-indicator"></div>
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="expense-category-indicator"></div>
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="expense-category-indicator"></div>
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="expense-category-indicator"></div>
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="expense-category-indicator"></div>
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
-                <div className="viz-card categories hidden"></div>
+                <div className="viz-card subscriptions hidden">
+                    <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
+                        <div className="container-fluid">
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Subscriptions</p>
+                        </div>
+                    </div>
+                    <div className='expenses-list-group-container'>
+                        <ol className="list-group">
+                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                                <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Subheading</div>
+                                    Content for list item
+                                </div>
+                                <span className="badge expense rounded-pill">$10 / Month</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
             </div>
-            <div className='footer'>hello</div>
+            <div className='footer'></div>
         </div>
     );
 }

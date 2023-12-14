@@ -9,6 +9,10 @@
     width: 96%;
     margin-left: 2%;
     height: 14%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    padding-left: 20px;
 }
 
 .summary-container {
@@ -76,9 +80,38 @@
     margin-right: 2%;
 }
 
+.navbar-expand-lg  .container-fluid {
+    min-height: 40px;
+}
+
 .expenses {
     width: 30%;
     margin-right: 2%;
+    height: 455px;
+}
+
+.expense-category-indicator {
+    width: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    aspect-ratio: 1/1;
+    background-color: blueviolet;
+}
+
+.expenses-list-group-container {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.expenses-list-group-container::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+}
+
+.expenses-list-group-container::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    width: 10px;
+    border-radius: 5px;
 }
 
 .list-group {
@@ -91,6 +124,17 @@
     border-left: none;
     border-right: none;
     margin-left: 10px;
+    margin-right: 10px;
+}
+
+.expense {
+    background-color: #ffeeee;
+    color: #ea443b;
+}
+
+.income {
+    background-color: #dcfaee;
+    color: #32b37d;
 }
 
 .dropdown-menu {
@@ -117,6 +161,11 @@
     transition: 0.7s;
 }
 
-.categories {
+.subscriptions {
     width: 25%;
+}
+
+.footer {
+    height: 9%;
+    opacity: 0;
 }

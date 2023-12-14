@@ -23,11 +23,8 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
     setArcData(arcs);
 
     const svg = d3.select(svgRef.current);
-
-    // Create arcs
     const arc = d3.arc<d3.PieArcDatum<Datum>>().innerRadius(0).outerRadius(Math.min(width, height) / 2);
 
-    // Append arcs to the SVG
     svg
       .selectAll('path')
       .data(arcs)
