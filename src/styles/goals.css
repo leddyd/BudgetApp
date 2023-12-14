@@ -1,0 +1,22 @@
+.objective-card {
+    height: 100%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.plan {
+    width: 30%;
+    margin-right: 2%;
+    height: 455px;
+}
+
+.card-content-wrapper {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.plan label, .plan .input-group, .plan input {
+    width: 80%;
+}

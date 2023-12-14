@@ -54,9 +54,16 @@ i {
     overflow-y: hidden;
 }
 
+.app-page-container {
+    width: 100%;
+    min-height: 100vh;
+    padding-left: 10px;
+    overflow-y: auto;
+}
+
 .hidden {
     animation: fade-in 0.5s;
-}
+}   
 
 @keyframes fade-in {
     from {

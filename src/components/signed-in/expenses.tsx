@@ -14,7 +14,7 @@ const data: Datum[] = [
 
 function RenderExpenses() {
     return (
-        <div className="expenses-container">
+        <div className="app-page-container">
             <div className="header-container hidden">
                 <p className='mb-0 fs-4 text-body-emphasis fw-medium text-muted'>This Month's History</p>
             </div>

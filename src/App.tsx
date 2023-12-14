@@ -6,6 +6,7 @@ import React from "react"
 import RenderLogin from "./components/signed-out/login"
 import RenderUserNavbar from "./components/signed-in/user-navbar"
 import RenderExpenses from "./components/signed-in/expenses"
+import RenderGoals from "./components/signed-in/goals"
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/goals" element={
           <div className="main-container">
             <RenderUserNavbar />
+            <RenderGoals />
           </div>
         } />
         <Route path="/achievements" element={
