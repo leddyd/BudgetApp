@@ -6,6 +6,15 @@ html,body {
     overflow-y: hidden;
 }
 
+.wrapper {
+    overflow-y: auto;
+    background-color: #c5f9d7;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+}
+
 i {
     margin-right: 8px;
     background-size: 1rem 1rem;

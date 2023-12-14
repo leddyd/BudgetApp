@@ -12,11 +12,11 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={
-          <>
+          <div className="wrapper">
             <RenderAlert />
             <RenderNonUserNavbar />
             <RenderHome />
-          </>
+          </div>
         } />
         <Route path="/login" element={<RenderLogin />} />
         <Route path="/profile" element={
