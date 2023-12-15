@@ -15,13 +15,12 @@ npm run dev
 ```
 
 To install dependencies
-```
 NodeJS:
+```
 The latest node installation can be found at https://nodejs.org/en
 Make sure to also install node package manager (npm)
-
+```
 D3:
+```
 npm install d3
-
-
 ```
