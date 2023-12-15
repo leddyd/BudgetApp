@@ -61,6 +61,11 @@ i {
     overflow-y: auto;
 }
 
+button.text-link {
+    background: none;
+    border: none;
+}
+
 .hidden {
     animation: fade-in 0.5s;
 }   

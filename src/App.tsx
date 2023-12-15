@@ -7,6 +7,7 @@ import RenderLogin from "./components/signed-out/login"
 import RenderUserNavbar from "./components/signed-in/user-navbar"
 import RenderExpenses from "./components/signed-in/expenses"
 import RenderGoals from "./components/signed-in/goals"
+import RenderAchievements from "./components/signed-in/achievements"
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/achievements" element={
           <div className="main-container">
             <RenderUserNavbar />
+            <RenderAchievements />
           </div>
         } />
       </Routes>

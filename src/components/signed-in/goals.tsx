@@ -5,70 +5,61 @@ function RenderGoals() {
     const [savingsValue, setSavingsValue] = useState(25);
     const [needsValue, setNeedsValue] = useState(25);
     const [wantsValue, setWantsValue] = useState(25);
-
-    const recalculateSliders = (changedSlider: 'debt' | 'savings' | 'needs' | 'wants', newValue: number, oldValue: number) => {
-        let magnitude = (oldValue - newValue) / 3;
     
-        switch (changedSlider) {
-            case 'debt':
-                setSavingsValue(Math.min(Math.max(savingsValue + magnitude, 0), 100));
-                setNeedsValue(Math.min(Math.max(needsValue + magnitude, 0), 100));
-                setWantsValue(Math.min(Math.max(wantsValue + magnitude, 0), 100));
-                break;
-            case 'savings':
-                setDebtValue(Math.min(Math.max(debtValue + magnitude, 0), 100));
-                setNeedsValue(Math.min(Math.max(needsValue + magnitude, 0), 100));
-                setWantsValue(Math.min(Math.max(wantsValue + magnitude, 0), 100));
-                break;
-            case 'needs':
-                setDebtValue(Math.min(Math.max(debtValue + magnitude, 0), 100));
-                setSavingsValue(Math.min(Math.max(savingsValue + magnitude, 0), 100));
-                setWantsValue(Math.min(Math.max(wantsValue + magnitude, 0), 100));
-                break;
-            case 'wants':
-                setDebtValue(Math.min(Math.max(debtValue + magnitude, 0), 100));
-                setNeedsValue(Math.min(Math.max(needsValue + magnitude, 0), 100));
-                setSavingsValue(Math.min(Math.max(savingsValue + magnitude, 0), 100));
-                break;
-            default:
-                break;
-            }
+    const handleDebtChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let newValue = parseInt(e.target.value);
+        let maxValue = 100 - needsValue - wantsValue - savingsValue;
+
+        if (maxValue - newValue < 0) {
+            setDebtValue(maxValue);
+        } else {
+            setDebtValue(newValue);
         }
-    
-      const handleDebtChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const oldValue = debtValue;
-        const newValue = parseInt(e.target.value, 10);
-        setDebtValue(newValue);
-        recalculateSliders('debt', newValue, oldValue);
-      };
-    
-      const handleSavingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const oldValue = savingsValue;
-        const newValue = parseInt(e.target.value, 10);
-        setSavingsValue(newValue);
-        recalculateSliders('savings', newValue, oldValue);
-      };
-    
-      const handleNeedsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const oldValue = needsValue;
-        const newValue = parseInt(e.target.value, 10);
-        setNeedsValue(newValue);
-        recalculateSliders('needs', newValue, oldValue);
-      };
+    };
 
-      const handleWantsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const oldValue = wantsValue;
-        const newValue = parseInt(e.target.value, 10);
-        setWantsValue(newValue);
-        recalculateSliders('wants', newValue, oldValue);
-      };
+    const handleSavingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let newValue = parseInt(e.target.value);
+        let maxValue = 100 - needsValue - wantsValue - debtValue;
+
+        if (maxValue - newValue < 0) {
+            setSavingsValue(maxValue);
+        } else {
+            setSavingsValue(newValue);
+        }
+    };
+
+    const handleNeedsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let newValue = parseInt(e.target.value);
+        let maxValue = 100 - savingsValue - wantsValue - debtValue;
+
+        if (maxValue - newValue < 0) {
+            setNeedsValue(maxValue);
+        } else {
+            setNeedsValue(newValue);
+        }
+    };
+
+    const handleWantsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let newValue = parseInt(e.target.value);
+        let maxValue = 100 - needsValue - savingsValue - debtValue;
+
+        if (maxValue - newValue < 0) {
+            setWantsValue(maxValue);
+        } else {
+            setWantsValue(newValue);
+        }
+    };
+
+    const addGoal = () => {
+
+    }
 
     return (
         <div className="app-page-container">
             <div className="header-container hidden">
                 <p className='mb-0 fs-4 text-body-emphasis fw-medium text-muted'>Objectives</p>
             </div>
-            <div className="viz-container">
+            <div className="goals-container">
                 <div className="objective-card plan hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
@@ -84,36 +75,64 @@ function RenderGoals() {
                         </div>
                         <label htmlFor="debt-slider" className="form-label">
                             Debt
-                            <span className="slider-value">{Math.trunc(debtValue)}%</span>
+                            <span className="slider-value">{debtValue}%</span>
                         </label>
-                        <input type="range" className="form-range" step="1" id="debt-slider" value={debtValue} onChange={handleDebtChange}></input>
+                        <input type="range" className="form-range" id="debt-slider" step="1" value={debtValue} onChange={handleDebtChange}></input>
                         <label htmlFor="savings-slider" className="form-label">
                             Savings
-                            <span className="slider-value">{Math.trunc(savingsValue)}%</span>
+                            <span className="slider-value">{savingsValue}%</span>
                         </label>
-                        <input type="range" className="form-range" step="1" id="savings-slider" value={savingsValue} onChange={handleSavingsChange}></input>
+                        <input type="range" className="form-range" id="savings-slider" step="1" value={savingsValue} onChange={handleSavingsChange}></input>
                         <label htmlFor="needs-slider" className="form-label">
                             Needs
-                            <span className="slider-value">{Math.trunc(needsValue)}%</span>
+                            <span className="slider-value">{needsValue}%</span>
                         </label>
-                        <input type="range" className="form-range" step="1" id="needs-slider" value={needsValue} onChange={handleNeedsChange}></input>
+                        <input type="range" className="form-range" id="needs-slider" step="1" value={needsValue} onChange={handleNeedsChange}></input>
                         <label htmlFor="wants-slider" className="form-label">
                             Wants
-                            <span className="slider-value">{Math.trunc(wantsValue)}%</span>
+                            <span className="slider-value">{wantsValue}%</span>
                         </label>
-                        <input type="range" className="form-range" step="1" id="wants-slider" value={wantsValue} onChange={handleWantsChange}></input>
+                        <input type="range" className="form-range" id="wants-slider" step="1" value={wantsValue} onChange={handleWantsChange}></input>
                     </div>
+                    <button className="auto-plan text-link"><i className="bi bi-hand-index-fill"></i>Apply our suggested plan</button>
                 </div>
-                <div className="viz-card subscriptions hidden">
+                <div className="objective-card objectives hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
-                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Specific Goals</p>
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Goals</p>
+                            <button type="button" className="btn add-goal-btn" onClick={addGoal}>
+                                <i className="bi bi-plus"></i>
+                                <span>Add Goal</span>
+                            </button>
                         </div>
                     </div>
-                    <div className='expenses-list-group-container'>
+                    <div className='goals-list-group-container'>
                         <ol className="list-group">
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                
+                            <li className="list-group-item d-flex align-items-center">
+                                <div className="ms-3 me-4 small">
+                                    <div className="fw-bold">Save $500</div>
+                                    By 5/31
+                                </div>
+                                <div className="progress" role="progressbar" aria-label="Example with label" aria-valuenow={25} aria-valuemin={0} aria-valuemax={100}>
+                                    <div className="progress-bar fw-medium" style={{ width: '25%', backgroundColor: "#8f33ff"}}>$125 (25%)</div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div className="objective-card archived-objectives hidden">
+                    <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
+                        <div className="container-fluid">
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Archived Goals</p>
+                        </div>
+                    </div>
+                    <div className='goals-list-group-container'>
+                        <ol className="list-group">
+                            <li className="list-group-item d-flex align-items-center">
+                                <div className="ms-1 me-4 small">
+                                    <div className="fw-bold">Save $500</div>
+                                    Completed 5/31
+                                </div>
                             </li>
                         </ol>
                     </div>

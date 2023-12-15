@@ -1,3 +1,12 @@
+.goals-container {
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 1vw;
+    min-height: 50%;
+    border-radius: 8px;
+    display: flex;
+}
+
 .objective-card {
     height: 100%;
     background-color: white;
@@ -7,7 +16,18 @@
 .plan {
     width: 30%;
     margin-right: 2%;
-    height: 455px;
+    height: 555px;
+}
+
+.objectives {
+    width: 40%;
+    margin-right: 2%;
+    height: 555px;
+}
+
+.archived-objectives {
+    flex-grow: 1;
+    height: 555px;
 }
 
 .card-content-wrapper {
@@ -25,4 +45,62 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.goals-list-group-container {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.goals-list-group-container::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+}
+
+.goals-list-group-container::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    width: 10px;
+    border-radius: 5px;
+}
+
+.add-goal-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.add-goal-btn i {
+    padding: 0;
+    margin: 0;
+    margin-right: 5px;
+}
+
+.add-goal-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.progress {
+    flex-grow: 1;
+    margin-right: 6%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background-color: #8f33ff;
+  }
+  
+  
+input[type="range"]::-moz-range-thumb {
+    background-color: #8f33ff;
+}
+
+.auto-plan {
+    margin-left: 8%;
+    margin-top: 15px;
+}
+
+.auto-plan i {
+    transition: margin-right .25s;
+}
+
+.auto-plan:hover i {
+    margin-right: 10px;
 }
