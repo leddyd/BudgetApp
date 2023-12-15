@@ -1,9 +1,9 @@
 # BudgetApp
-Translator for American sign language using hand detection and image classification to translate signs into letters. Utilizes media pipe, tensorflow, and keras model to do model training and drawing landmarks for hand detection.
+Web development project for tracking and minimizing expenses.
 
 # Package Dependencies
 ```
-Node.js 20.10.0 LTS + npm
+Node.js 20.10.0 LTS
 React + Vite
 D3.js
 ```
