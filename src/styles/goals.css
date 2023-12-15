@@ -20,3 +20,9 @@
 .plan label, .plan .input-group, .plan input {
     width: 80%;
 }
+
+.form-label {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
