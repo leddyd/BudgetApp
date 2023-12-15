@@ -1,5 +1,5 @@
-# BudgetApp
-Web development project for tracking and minimizing expenses.
+# WeGonBudget
+Web development project for tracking and minimizing expenses using react (typescript) + vite and d3 (for interactive visualizations).
 
 # Package Dependencies
 ```
