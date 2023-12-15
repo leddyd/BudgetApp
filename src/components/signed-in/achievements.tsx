@@ -8,10 +8,17 @@ function RenderAchievements() {
             </div>
 
             <div className="goals-container">
-                <div className="objective-card plan hidden">
+                <div className="objective-card achievements hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
-                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Accomplishments</p>
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Awards</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="objective-card savings hidden">
+                    <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
+                        <div className="container-fluid">
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Savings (Chart)</p>
                         </div>
                     </div>
                 </div>
