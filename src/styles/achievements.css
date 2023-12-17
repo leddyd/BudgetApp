@@ -8,3 +8,8 @@
     flex-grow: 1;
     height: 555px;
 }
+
+.line-chart-container {
+    display: flex;
+    justify-content: center;
+}

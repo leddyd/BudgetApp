@@ -13,6 +13,14 @@ const data: Datum[] = [
 ];
 
 function RenderExpenses() {
+    const addPayment = () => {
+
+    }
+
+    const addSubscription = () => {
+
+    }
+
     return (
         <div className="app-page-container">
             <div className="header-container hidden">
@@ -69,7 +77,11 @@ function RenderExpenses() {
                 <div className="viz-card expenses hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
-                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Payments</p>
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Goals</p>
+                            <button type="button" className="btn add-goal-btn" onClick={addPayment}>
+                                <i className="bi bi-plus"></i>
+                                <span>Add Payment</span>
+                            </button>
                         </div>
                     </div>
                     <div className='expenses-list-group-container'>
@@ -131,6 +143,10 @@ function RenderExpenses() {
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
                             <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Subscriptions</p>
+                            <button type="button" className="btn add-goal-btn" onClick={addSubscription}>
+                                <i className="bi bi-plus"></i>
+                                <span>Add Subscription</span>
+                            </button>
                         </div>
                     </div>
                     <div className='expenses-list-group-container'>

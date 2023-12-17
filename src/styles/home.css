@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 5%;
 }
 
 #home-text-container {
@@ -75,4 +76,50 @@ input[type=submit] {
     font-weight: 500;
     margin-bottom: 25px;
     margin-top: 10px;
+}
+
+#about {
+    display: flex;
+}
+
+.about-card {
+    margin-top: 15px;
+    margin-right: 5%;
+    width: 33%;
+    border-top: 2px solid gray;
+    cursor: pointer;
+}
+
+.about-card img {
+    width: 25%;
+    aspect-ratio: 1/1;
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+
+.bi-chevron-right {
+    margin-left: 5px;
+    transition: margin-left .4s;
+    font-size: 18px;
+}
+
+.hover-bar {
+    background-color: #8f33ff;
+    width: 0;
+    height: 5px;
+    margin-top: -4px;
+    margin-bottom: 30px;
+    transition: width .4s;
+}
+
+.about-card:hover .hover-bar{
+    width: 100%;
+}
+
+.about-card:hover .fs-5.text-body-emphasis i.bi-chevron-right {
+    margin-left: 10px;
+}
+
+.home-header-container {
+    width: 50%;
 }

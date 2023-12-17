@@ -94,7 +94,7 @@ function RenderGoals() {
                         </label>
                         <input type="range" className="form-range" id="wants-slider" step="1" value={wantsValue} onChange={handleWantsChange}></input>
                     </div>
-                    <button className="auto-plan text-link"><i className="bi bi-hand-index-fill"></i>Apply our suggested plan</button>
+                    <button className="auto-plan text-link"><i className="bi bi-check2-square"></i>Apply our suggested plan</button>
                 </div>
                 <div className="objective-card objectives hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>

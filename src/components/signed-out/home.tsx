@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { MouseEventHandler, useEffect, useRef, useState } from "react"
 import { Warning } from "../../utils/formEvents";
 
 function RenderHome() {
@@ -18,6 +18,10 @@ function RenderHome() {
             }
         });
     };
+
+    const directToPage = (link:string) => {
+        window.location.href = link
+    }
 
     useEffect(() => {
         const observerOptions = {
@@ -57,7 +61,7 @@ function RenderHome() {
 
     return (
         <div id="home">
-            <div id="home-header-container">
+            <div className="home-header-container" id="features-header">
                 <div>
                     <p>PERSONAL FINANCE WITH WEGONBUDGET</p>
                     <h1>MAKE A CHANGE</h1>
@@ -144,14 +148,25 @@ function RenderHome() {
                     {warningMsg && <Warning msg={warningMsg} />}
                 </div>
             </div>
-            <div>
-                pppp
+            <div className="home-header-container" id="about-header">
+                <div>
+                    <h3>Meet the creators</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed risus pretium quam vulputate dignissim suspendisse in est ante. Blandit massa enim nec dui nunc mattis enim. Odio euismod lacinia at quis risus sed. Augue mauris augue neque gravida in fermentum et. Faucibus vitae aliquet nec ullamcorper sit amet risus.</p>
+                </div>
             </div>
-            <div>
-                pppp
-            </div>
-            <div>
-                pppp
+            <div id="about">
+                <div className="about-card" onClick={() => directToPage("https://www.linkedin.com/in/dylan-leddy-298a71223")}>
+                    <div className="hover-bar"></div>
+                    <img src="https://media.licdn.com/dms/image/C4E03AQFmMnB8gkDt6Q/profile-displayphoto-shrink_400_400/0/1634930548034?e=1708560000&v=beta&t=EKGiqfDBto5m2In56lN0sXRI0C89vH8q-Xjog1jWcFk"/>
+                    <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Dylan Leddy<i className="bi bi-chevron-right"></i></p>
+                    <p>A description</p>
+                </div>
+                <div className="about-card" onClick={() => directToPage("https://www.linkedin.com/in/bprall/")}>
+                    <div className="hover-bar"></div>
+                    <img src="https://media.licdn.com/dms/image/D4E03AQFbGrNlhV3vOQ/profile-displayphoto-shrink_100_100/0/1701894420208?e=1708560000&v=beta&t=cqzMonxSXKY2KGL_ASbSb62XIhoMLf91ee-lOQpaRas"/>
+                    <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Blake Prall<i className="bi bi-chevron-right"></i></p>
+                    <p>A description</p>
+                </div>
             </div>
         </div>
     )

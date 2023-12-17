@@ -78,7 +78,7 @@
 }
 
 .expenses {
-    width: 30%;
+    width: 28%;
     margin-right: 2%;
     height: 455px;
 }
@@ -155,10 +155,15 @@
 }
 
 .subscriptions {
-    width: 25%;
+    width: 27%;
 }
 
 .footer {
     height: 9%;
     opacity: 0;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bd-violet-bg);
+    --bs-tooltip-color: var(--bd-violet-bg);
 }

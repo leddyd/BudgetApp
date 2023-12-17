@@ -7,7 +7,17 @@ function CapitalizeFirst(str: string): string {
 }
 
 function RenderNonUserNavbar() {
-    const pills = ['features', 'about'];
+    const pills = [
+      {title: 'features', link:"#features-header"},
+      {title: 'about', link:"#about-header"}
+    ];
+
+    const scrollToSection = (sectionId:string) => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    };
 
     return (
       <nav className="nonuser-navbar navbar sticky-top bg-body-tertiary">
@@ -23,7 +33,17 @@ function RenderNonUserNavbar() {
             </Link>
             <ul className="nav nav-pills">
               {pills.map((pill) => (
-                  <li className="nonuser-nav-item nav-item"><Link className="nonuser-nav-link nav-link" to={`/${pill}`}>{CapitalizeFirst(pill)}</Link></li>
+                  <li className="nonuser-nav-item nav-item">
+                    <a 
+                      className="nonuser-nav-link nav-link"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(pill.link.substring(1));
+                      }}
+                    >
+                      {CapitalizeFirst(pill.title)}
+                    </a>
+                  </li>
               ))}
             </ul>
           </div>
