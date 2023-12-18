@@ -17,8 +17,8 @@ function RenderAchievements() {
                     <div className='goals-list-group-container'>
                         <ol className="list-group">
                             <li className="list-group-item d-flex align-items-center">
-                                <i className="bi-wallet"></i>
-                                <div className="ms-1 me-4 small">
+                                <i className="bi-trophy-fill trophy-icon ms-2"></i>
+                                <div className="ms-3 me-4 small">
                                     <div className="fw-bold">Save $500</div>
                                     Completed 5/31
                                 </div>

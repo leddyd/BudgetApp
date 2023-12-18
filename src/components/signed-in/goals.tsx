@@ -41,6 +41,13 @@ function RenderGoals() {
         }
     };
 
+    const autoApplyPlan = () => {
+        setSavingsValue(20)
+        setNeedsValue(50)
+        setWantsValue(30)
+        setDebtValue(0)
+    }
+
     const handleWantsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let newValue = parseInt(e.target.value);
         let maxValue = 100 - needsValue - savingsValue - debtValue;
@@ -70,12 +77,12 @@ function RenderGoals() {
                     </div>
                     <div className="card-content-wrapper">
                         <label htmlFor="income-field" className="form-label">After-Tax Monthly Income</label>
-                        <div className="input-group mb-3">
+                        <div className="input-group mb-4">
                             <span className="input-group-text">$</span>
                             <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" id="income-field"/>
                             <span className="input-group-text">.00</span>
                         </div>
-                        <label htmlFor="debt-slider" className="form-label">
+                        <label htmlFor="debt-slider" className="form-label mt-4">
                             Debt
                             <span className="slider-value">{debtValue}%</span>
                         </label>
@@ -94,9 +101,9 @@ function RenderGoals() {
                             Wants
                             <span className="slider-value">{wantsValue}%</span>
                         </label>
-                        <input type="range" className="form-range" id="wants-slider" step="1" value={wantsValue} onChange={handleWantsChange}></input>
+                        <input type="range" className="form-range mb-4  " id="wants-slider" step="1" value={wantsValue} onChange={handleWantsChange}></input>
                     </div>
-                    <button className="auto-plan text-link"><i className="bi bi-check2-square"></i>Apply our suggested plan</button>
+                    <button className="auto-plan text-link" onClick={autoApplyPlan}><i className="bi bi-check2-square"></i>Apply our suggested plan</button>
                 </div>
                 <div className="objective-card objectives hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
@@ -111,6 +118,7 @@ function RenderGoals() {
                     <div className='goals-list-group-container'>
                         <ol className="list-group">
                             <li className="list-group-item d-flex align-items-center">
+                                <i className="bi bi-bullseye ms-3 uncompleted-goal"></i>
                                 <div className="ms-3 me-4 small">
                                     <div className="fw-bold">Save $500</div>
                                     By 5/31
@@ -131,7 +139,8 @@ function RenderGoals() {
                     <div className='goals-list-group-container'>
                         <ol className="list-group">
                             <li className="list-group-item d-flex align-items-center">
-                                <div className="ms-1 me-4 small">
+                                <i className="bi bi-bullseye ms-1 completed-goal"></i>
+                                <div className="ms-3 me-4 small">
                                     <div className="fw-bold">Save $500</div>
                                     Completed 5/31
                                 </div>

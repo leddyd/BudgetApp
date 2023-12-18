@@ -104,3 +104,15 @@ input[type="range"]::-moz-range-thumb {
 .auto-plan:hover i {
     margin-right: 10px;
 }
+
+.completed-goal {
+    color: #32b37d;
+}
+
+.uncompleted-goal {
+    color: rgb(255, 204, 0);
+}
+
+.failed-goal {
+    color: #ea443b;
+}

@@ -13,3 +13,11 @@
     display: flex;
     justify-content: center;
 }
+
+.trophy-icon {
+    color: rgb(255, 204, 0);
+}
+
+.trophy-bullet {
+    font-size: 5px;
+}
