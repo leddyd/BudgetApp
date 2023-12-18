@@ -99,10 +99,9 @@ function RenderGoals() {
                 <div className="objective-card objectives hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
-                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Goals</p>
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Goals</p>
                             <button type="button" className="btn add-goal-btn" onClick={addGoal}>
                                 <i className="bi bi-plus"></i>
-                                <span>Add Goal</span>
                             </button>
                         </div>
                     </div>

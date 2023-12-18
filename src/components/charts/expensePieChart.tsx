@@ -17,15 +17,19 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
   const [arcData, setArcData] = useState<d3.PieArcDatum<Datum>[]>([]);
 
   useEffect(() => {
-    const pie = d3.pie<Datum>().value(d => d.value);
+    const pie = d3.pie<Datum>().value((d) => d.value);
     const arcs = pie(data);
 
     setArcData(arcs);
 
-    const svg = d3.select(svgRef.current);
-    const arc = d3.arc<d3.PieArcDatum<Datum>>().innerRadius(0).outerRadius(Math.min(width, height) / 2);
+    const svg = d3.select(svgRef.current).attr('width', width + 14).attr('height', height + 14);
 
-    const paths = svg
+    const radius = Math.min(width - 14, height -14) / 2;
+    const arc = d3.arc<d3.PieArcDatum<Datum>>().innerRadius(0).outerRadius(radius);
+
+    const g = svg.append('g').attr('transform', `translate(${width / 2},${height / 2})`);
+
+    const paths = g
       .selectAll('path')
       .data(arcs)
       .enter()
@@ -36,13 +40,22 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
       .attr('data-bs-custom-class', 'custom-tooltip')
       .attr('d', arc)
       .attr('fill', (_, i) => d3.schemeCategory10[i])
-      .attr('transform', `translate(${width / 2},${height / 2})`);
+      .on('mouseover', function () {
+        d3.select(this).style('stroke', 'black').style('stroke-width', 2);
+      })
+      .on('mouseout', function () {
+        d3.select(this).style('stroke', 'none');
+      });
 
-      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(
+      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+    );
   }, [data, height, width]);
 
-  return <svg ref={svgRef} width={width} height={height}/>;
+  return <svg ref={svgRef} />;
 };
 
 export default PieChart;
+
+

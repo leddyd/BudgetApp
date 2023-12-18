@@ -77,10 +77,9 @@ function RenderExpenses() {
                 <div className="viz-card expenses hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
-                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Goals</p>
+                            <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Transactions</p>
                             <button type="button" className="btn add-goal-btn" onClick={addPayment}>
                                 <i className="bi bi-plus"></i>
-                                <span>Add Payment</span>
                             </button>
                         </div>
                     </div>
@@ -145,7 +144,6 @@ function RenderExpenses() {
                             <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Subscriptions</p>
                             <button type="button" className="btn add-goal-btn" onClick={addSubscription}>
                                 <i className="bi bi-plus"></i>
-                                <span>Add Subscription</span>
                             </button>
                         </div>
                     </div>

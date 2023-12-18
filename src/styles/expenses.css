@@ -80,7 +80,7 @@
 .expenses {
     width: 28%;
     margin-right: 2%;
-    height: 455px;
+    height: 470px;
 }
 
 .expense-category-indicator {
@@ -156,6 +156,7 @@
 
 .subscriptions {
     width: 27%;
+    height: 470px;
 }
 
 .footer {
@@ -166,4 +167,19 @@
 .custom-tooltip {
     --bs-tooltip-bg: var(--bd-violet-bg);
     --bs-tooltip-color: var(--bd-violet-bg);
+}
+
+.add-goal-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+}
+
+.add-goal-btn i {
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
 }
