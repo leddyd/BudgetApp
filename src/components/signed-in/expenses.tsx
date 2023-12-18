@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import PieChart from '../charts/expensePieChart';
 import ProgressBar from '../charts/progressBar';
+import AddTransactionModal from '../modals/add-transaction';
+import AddSubscriptionModal from '../modals/add-subscription';
 
 interface Datum {
     label: string;
@@ -13,13 +16,16 @@ const data: Datum[] = [
 ];
 
 function RenderExpenses() {
-    const addPayment = () => {
+    const [showTransactionModal, setShowTransactionModal] = useState(false);
+    const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
 
+    const toggleSubscriptionModal = () => {
+        setShowSubscriptionModal(!showSubscriptionModal);
     }
 
-    const addSubscription = () => {
-
-    }
+    const toggleTransactionModal = () => {
+        setShowTransactionModal(!showTransactionModal);
+    };
 
     return (
         <div className="app-page-container">
@@ -78,9 +84,10 @@ function RenderExpenses() {
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
                             <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your Transactions</p>
-                            <button type="button" className="btn add-goal-btn" onClick={addPayment}>
+                            <button type="button" className="btn add-goal-btn" onClick={() => {setShowTransactionModal(!showTransactionModal)}}>
                                 <i className="bi bi-plus"></i>
                             </button>
+                            {showTransactionModal && <AddTransactionModal onClose={toggleTransactionModal} />}
                         </div>
                     </div>
                     <div className='expenses-list-group-container'>
@@ -91,7 +98,7 @@ function RenderExpenses() {
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
-                                <span className="badge income rounded-pill">Sent $131</span>
+                                <span className="badge income rounded-pill"><i className="bi bi-arrow-down-left-circle-fill"></i>Received $131</span>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
@@ -142,9 +149,10 @@ function RenderExpenses() {
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
                             <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Subscriptions</p>
-                            <button type="button" className="btn add-goal-btn" onClick={addSubscription}>
+                            <button type="button" className="btn add-goal-btn" onClick={toggleSubscriptionModal}>
                                 <i className="bi bi-plus"></i>
                             </button>
+                            {showSubscriptionModal && <AddSubscriptionModal onClose={toggleSubscriptionModal} />}
                         </div>
                     </div>
                     <div className='expenses-list-group-container'>
@@ -154,13 +162,15 @@ function RenderExpenses() {
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
-                                <span className="badge expense rounded-pill">$10 / Month</span>
+                                <span className="badge expense rounded-pill"><i className="bi bi-arrow-up-right-circle-fill"></i>$10 / Month</span>
                             </li>
                         </ol>
                     </div>
                 </div>
             </div>
-            <div className='footer'></div>
+            <div className='footer'>
+                
+            </div>
         </div>
     );
 }

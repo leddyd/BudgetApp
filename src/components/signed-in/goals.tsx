@@ -1,10 +1,12 @@
 import { useState } from "react";
+import AddGoalModal from "../modals/add-goal";
 
 function RenderGoals() {
     const [debtValue, setDebtValue] = useState(25);
     const [savingsValue, setSavingsValue] = useState(25);
     const [needsValue, setNeedsValue] = useState(25);
     const [wantsValue, setWantsValue] = useState(25);
+    const [showGoalModal, setShowGoalModal] = useState(false);
     
     const handleDebtChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let newValue = parseInt(e.target.value);
@@ -50,8 +52,8 @@ function RenderGoals() {
         }
     };
 
-    const addGoal = () => {
-
+    const toggleGoalModal = () => {
+        setShowGoalModal(!showGoalModal);
     }
 
     return (
@@ -100,9 +102,10 @@ function RenderGoals() {
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>
                         <div className="container-fluid">
                             <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Goals</p>
-                            <button type="button" className="btn add-goal-btn" onClick={addGoal}>
+                            <button type="button" className="btn add-goal-btn" onClick={toggleGoalModal}>
                                 <i className="bi bi-plus"></i>
                             </button>
+                            {showGoalModal && <AddGoalModal onClose={toggleGoalModal}/>}
                         </div>
                     </div>
                     <div className='goals-list-group-container'>

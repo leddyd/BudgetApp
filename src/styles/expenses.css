@@ -183,3 +183,17 @@
     padding: 0;
     margin: 0;
 }
+
+.custom-dropdown-menu {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.custom-save-button {
+    background-color: #8f33ff;
+    border: none;
+}
+
+.custom-save-button:hover {
+    background-color: #761AE6;
+}

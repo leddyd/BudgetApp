@@ -1,9 +1,6 @@
 import LineChart from "../charts/lineChart"
 
 function RenderAchievements() {
-    const exampleData = [34, 44, 32, 78, 184, 221, 171, 26, 62, 5];
-    const cleanData = exampleData.map((item, i) => ({ x: i, y: item }));
-
     return (
         <div className="app-page-container">
             <div className="header-container hidden">

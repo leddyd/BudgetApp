@@ -11,15 +11,20 @@ function RenderUserNavbar() {
     return (
         <nav className="user-nav-container">
             <ul className="user-nav nav flex-column align-items-center nav-pills">
-                <li className="user-nav-item nav-item">
-                    <Link className="user-nav-link nav-link" to="/profile"><i className="bi bi-person-circle"></i></Link>
-                </li>
-                <hr className="user-nav-hr"></hr>
-                {pills.map((pill) => (
                     <li className="user-nav-item nav-item">
-                        <Link className="user-nav-link nav-link" to={`${pill.page}`}><i className={`${pill.icon}`}></i></Link>
+                        <Link className="user-nav-link nav-link" to="/profile"><i className="bi bi-person-circle"></i></Link>
                     </li>
-                ))}
+                    <hr className="user-nav-hr"></hr>
+                    {pills.map((pill) => (
+                        <li className="user-nav-item nav-item">
+                            <Link className="user-nav-link nav-link" to={`${pill.page}`}><i className={`${pill.icon}`}></i></Link>
+                        </li>
+                    ))}
+                    <div className="home-tab">
+                        <li className="user-nav-item nav-item">
+                            <Link className="user-nav-link nav-link" to="/"><i className="bi bi-compass-fill"></i></Link>
+                        </li>
+                    </div>
             </ul>
         </nav>
     );
