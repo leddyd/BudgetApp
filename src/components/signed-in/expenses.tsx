@@ -10,9 +10,9 @@ interface Datum {
 }
 
 const data: Datum[] = [
-    { label: 'Category 1', value: 30 },
-    { label: 'Category 2', value: 50 },
-    { label: 'Category 3', value: 20 },
+    { label: 'Groceries', value: 30 },
+    { label: 'Bills', value: 50 },
+    { label: 'Restaurants', value: 20 },
 ];
 
 function RenderExpenses() {

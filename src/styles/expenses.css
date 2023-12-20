@@ -202,3 +202,11 @@
 .custom-save-button:hover {
     background-color: #761AE6;
 }
+
+.piechart-legend-label {
+    transition: margin-right .25s;
+}
+
+.legend-label-transform {
+    margin-right: 5px;
+}
