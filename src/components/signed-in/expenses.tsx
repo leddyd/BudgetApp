@@ -53,12 +53,6 @@ function RenderExpenses() {
                     <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your budget</p>
                     <ProgressBar />
                 </div>
-                <div className="legend-container">
-                    <ul>
-                        <li>Needs</li>
-                        <li>Wants</li>
-                    </ul>
-                </div>
             </div>
             <div className="viz-container">
                 <div className="viz-card chart hidden">
@@ -100,7 +94,7 @@ function RenderExpenses() {
                         <ol className="list-group">
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
@@ -108,42 +102,42 @@ function RenderExpenses() {
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
                             </li>
                             <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>
@@ -164,7 +158,7 @@ function RenderExpenses() {
                     <div className='expenses-list-group-container'>
                         <ol className="list-group">
                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="ms-2 me-auto">
+                                <div className="ms-2 me-auto small">
                                     <div className="fw-bold">Subheading</div>
                                     Content for list item
                                 </div>

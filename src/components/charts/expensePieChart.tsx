@@ -54,7 +54,7 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
           .attr('transform', `translate(5, -1)`);
       });
 
-      var legendG = svg.selectAll(".legend")
+    var legendG = svg.selectAll(".legend")
       .data(pie(data))
       .enter().append("g")
       .attr('transform', function (d, i) {
@@ -67,14 +67,14 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
       .attr("height", 8)
       .attr("rx", 50)
       .attr("fill", (_, i) => d3.schemeCategory10[i])
+      
     legendG.append("text")
       .text(function(d){
         return d.data.label;
       })
-      .style("font-size", 12)
       .attr("y", 10)
       .attr("transform", (d, i) => `translate(5, -1)`)
-      .attr('class', (d) => d.data.label)
+      .attr('class', (d) => `${d.data.label} small`)
       .attr("x", 11);
 
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');

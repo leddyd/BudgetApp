@@ -25,30 +25,54 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
   }
 
   init() {
-    const { xScale, barHeight } = this.props;
+    const { xScale, barHeight, data } = this.props;
     const node = this.ref.current;
-
-    let xPos = 0;
-    Object.keys(this.props.data).forEach((category) => {
-      select(node)
+  
+    Object.keys(data).forEach((category) => {
+      const rect = select(node)
         .append('rect')
         .attr('class', `bar-${category}`)
         .attr('x', 0)
         .attr('y', 0)
         .attr('width', 0)
         .attr('height', barHeight)
+        .on('mouseover', function () {
+          if (category === 'needs') {
+            select(this).attr('fill', '#246896');
+            select('.needs-legend-label').transition()
+              .duration(200)
+              .attr('transform', 'translate(5, 0)');
+          } else {
+            select(this).attr('fill', '#2c8f2c');
+            select('.wants-legend-label').transition()
+              .duration(200)
+              .attr('transform', 'translate(5, 0)');
+          }
+        })
+        .on('mouseout', function () {
+          if (category === 'needs') {
+            select(this).attr('fill', '#1f77b4');
+            select('.needs-legend-label').transition()
+              .duration(200)
+              .attr('transform', 'translate(0, 0)');
+          } else {
+            select(this).attr('fill', '#2ca02c');
+            select('.wants-legend-label').transition()
+              .duration(200)
+              .attr('transform', 'translate(0, 0)');
+          }
+        })
         .attr('fill', category === 'needs' ? 'blue' : 'green');
-      xPos += xScale(this.props.data[category]);
     });
-
+  
     select(node)
-        .append('text')
-        .attr('class', `amount-left fw-medium text-muted`)
-        .attr('x', 0)
-        .attr('y', barHeight)
-        .attr('dx', -10)
-        .attr('dy', 20);
-
+      .append('text')
+      .attr('class', `amount-left fw-medium text-muted`)
+      .attr('x', 0)
+      .attr('y', barHeight)
+      .attr('dx', -10)
+      .attr('dy', 20);
+  
     this.barTransition();
   }
 
@@ -61,7 +85,7 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
     sortedCategories.forEach((category) => {
       select(`.bar-${category}`)
         .transition(t)
-        .attr('fill', data[category] > total ? 'red' : (category === 'needs' ? 'blue' : 'green'))
+        .attr('fill', category === 'needs' ? 'blue' : 'green')
         .attr('width', xScale(Math.min(data[category] + spentWidth, total)));
 
       spentWidth += data[category];
@@ -84,4 +108,3 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
 }
 
 export default ExpenditureBar;
-
