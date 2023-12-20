@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import { scaleLinear } from 'd3';
+import React from 'react';
+import { scaleLinear, scaleOrdinal, schemeCategory10 } from 'd3';
 import ExpenditureBar from './expenditureBar';
-import { render } from 'react-dom';
 
 const total = 500;
 
@@ -17,15 +16,17 @@ const svgHeight = 113;
 
 class ProgressBar extends React.Component {
   state = {
-    data: total * .5,
+    data: {
+      needs: total * 0.3,
+      wants: total * 0.2,
+    }
   }
 
-  render() {
-    const parentWidth = 600;
+  render(): JSX.Element {
+    const parentWidth = 850;
     const { data } = this.state;
 
     const width = parentWidth - margin.left - margin.right;
-    const height = svgHeight - margin.top - margin.bottom;
 
     const xScale = scaleLinear()
       .domain([0, total])
@@ -39,9 +40,9 @@ class ProgressBar extends React.Component {
         >
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             <g className="budget-bar-group">
-              <rect x="0" y="0" width={width} height={barHeight} rx={`${barHeight / 2}`} ry={`${barHeight / 2}`} opacity="0.2" />
+              <rect x="0" y="0" width={width} height={barHeight} opacity="0.2" />
               <text x="0" y="0" dy="-10" dx="0" className='fw-medium text-muted'>
-                ${total - data} left 
+                ${total - (data.needs + data.wants)} left
               </text>
             </g>
             <ExpenditureBar

@@ -41,6 +41,7 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
       .attr('d', arc)
       .attr('fill', (_, i) => d3.schemeCategory10[i])
       .on('mouseover', function () {
+        this.parentNode.appendChild(this);
         d3.select(this).style('stroke', 'black').style('stroke-width', 2);
       })
       .on('mouseout', function () {

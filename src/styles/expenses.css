@@ -42,7 +42,13 @@
 }
 
 .progress-container {
+    width: 50%;
+}
+
+.legend-container {
     flex-grow: 1;
+    display: flex;
+    align-items: center;
 }
 
 .viz-container {
@@ -108,8 +114,7 @@
 }
 
 .list-group {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+    border-radius: 0;
 }
 
 .list-group li {

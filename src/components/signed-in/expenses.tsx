@@ -53,6 +53,12 @@ function RenderExpenses() {
                     <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your budget</p>
                     <ProgressBar />
                 </div>
+                <div className="legend-container">
+                    <ul>
+                        <li>Needs</li>
+                        <li>Wants</li>
+                    </ul>
+                </div>
             </div>
             <div className="viz-container">
                 <div className="viz-card chart hidden">
