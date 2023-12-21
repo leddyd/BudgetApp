@@ -27,8 +27,9 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
   init() {
     const { xScale, barHeight, data } = this.props;
     const node = this.ref.current;
+    const sortedCategories = Object.keys(data).sort((a, b) => data[a] - data[b]);
   
-    Object.keys(data).forEach((category) => {
+    sortedCategories.forEach((category) => {
       const rect = select(node)
         .append('rect')
         .attr('class', `bar-${category}`)
@@ -79,10 +80,10 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
   barTransition() {
     const { xScale, total, data } = this.props;
     const t = transition().duration(800);
-    const sortedCategories = Object.keys(data).sort((a, b) => data[a] - data[b]);
+    const sortedCategories = Object.keys(data).sort((a, b) => data[b] - data[a]);
 
     let spentWidth = 0;
-    sortedCategories.forEach((category) => {
+    sortedCategories.forEach((category, i) => {
       select(`.bar-${category}`)
         .transition(t)
         .attr('fill', category === 'needs' ? 'blue' : 'green')

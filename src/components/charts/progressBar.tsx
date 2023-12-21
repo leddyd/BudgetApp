@@ -17,8 +17,8 @@ const svgHeight = 113;
 class ProgressBar extends React.Component {
   state = {
     data: {
-      needs: total * 0.3,
-      wants: total * 0.2,
+      needs: 50,
+      wants: 25,
     }
   }
 
@@ -38,9 +38,14 @@ class ProgressBar extends React.Component {
           width={width + margin.left + margin.right}
           height={svgHeight}
         >
-          <g transform={`translate(${margin.left}, ${margin.top})`}>
+          <defs>
+            <clipPath id="clip">
+              <rect x="0" y="0" rx={10} ry={10} width={width} height={barHeight} />
+            </clipPath>
+          </defs>
+          <g transform={`translate(${margin.left}, ${margin.top})`} clipPath="url(#clip)">
             <g className="budget-bar-group">
-              <rect x="0" y="0" width={width} height={barHeight} opacity="0.2" />
+              <rect x="0" y="0" width={width} height={barHeight} opacity="0.2"/>
               <text x="0" y="0" dy="-10" dx="0" className='fw-medium text-muted'>
                 ${total - (data.needs + data.wants)} left
               </text>
