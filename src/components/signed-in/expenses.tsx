@@ -15,6 +15,22 @@ const data: Datum[] = [
     { label: 'Restaurants', value: 20 },
 ];
 
+var transactions = [
+    {party: "Dave", date: "12/22", type: "Received", amount:"$50"},
+    {party: "Wiseman", date: "12/22", type: "Received", amount:"$50"},
+    {party: "Steve", date: "12/22", type: "Sent", amount:"$50"},
+    {party: "Bob", date: "12/22", type: "Sent", amount:"$50"},
+    {party: "Bill", date: "12/22", type: "Received", amount:"$50"},
+];
+
+var subscriptions = [
+    {party: "Netflix", date: "Since 8/03", amount:"$10"},
+    {party: "Brazzers", date: "Since 8/03", amount:"$12"},
+    {party: "Spotify", date: "Since 8/03", amount:"$5"},
+    {party: "Xbox", date: "Since 8/03", amount:"$5"},
+    {party: "Amazon Prime", date: "Since 8/03", amount:"$15"},
+];
+
 function RenderExpenses() {
     const [showTransactionModal, setShowTransactionModal] = useState(false);
     const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
@@ -92,56 +108,19 @@ function RenderExpenses() {
                     </div>
                     <div className='expenses-list-group-container'>
                         <ol className="list-group">
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                                <span className="badge income rounded-pill"><i className="bi bi-arrow-down-left-circle-fill"></i>Received $131</span>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="expense-category-indicator"></div>
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                            </li>
+                            {transactions.map((t) => (
+                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                                    <div className="expense-category-indicator"></div>
+                                    <div className="ms-2 me-auto small">
+                                        <div className="fw-bold">{t.party}</div>
+                                        {t.date}
+                                    </div>
+                                    <span className={`badge ${t.type} rounded-pill`}>
+                                        <i className={t.type === "Received" ? "bi bi-arrow-down-left-circle-fill" : "bi bi-arrow-up-right-circle-fill"}></i>
+                                        {t.type} {t.amount}
+                                    </span>
+                                </li>
+                            ))}
                         </ol>
                     </div>
                 </div>
@@ -157,13 +136,19 @@ function RenderExpenses() {
                     </div>
                     <div className='expenses-list-group-container'>
                         <ol className="list-group">
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="ms-2 me-auto small">
-                                    <div className="fw-bold">Subheading</div>
-                                    Content for list item
-                                </div>
-                                <span className="badge expense rounded-pill"><i className="bi bi-arrow-up-right-circle-fill"></i>$10 / Month</span>
-                            </li>
+                        {subscriptions.map((s) => (
+                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                                    <div className="expense-category-indicator"></div>
+                                    <div className="ms-2 me-auto small">
+                                        <div className="fw-bold">{s.party}</div>
+                                        {s.date}
+                                    </div>
+                                    <span className={"badge Sent rounded-pill"}>
+                                        <i className="bi bi-arrow-up-right-circle-fill"></i>
+                                        {s.amount} / Month
+                                    </span>
+                                </li>
+                            ))}
                         </ol>
                     </div>
                 </div>

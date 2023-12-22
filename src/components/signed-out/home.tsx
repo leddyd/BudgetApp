@@ -1,6 +1,6 @@
-import React, { MouseEventHandler, useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom";
-import { SignUp } from './signup';
+import { SignUp } from '../auth/signup';
 import { Warning } from "../../utils/formEvents";
 
 function RenderHome() {
@@ -45,19 +45,6 @@ function RenderHome() {
         };
     }, [cardRefs]);
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [warningMsg, SetWarningMsg] = React.useState<string | null>(null);
-
-    const navigate = useNavigate();
-
-    const handleSignUpSuccess = () => {
-        navigate("/profile");
-    };
-
     return (
         <div id="home">
             <div className="home-header-container" id="features-header">
@@ -78,8 +65,7 @@ function RenderHome() {
                 <div id="signup-container" className="sticky-top">
                     <h3>Create an account</h3>
                     <p>Start managing your finances by filling out the form below.</p>
-                    <SignUp onSignUpSuccess={handleSignUpSuccess} />
-                    {warningMsg && <Warning msg={warningMsg} />}
+                    <SignUp />
                 </div>
             </div>
             <div className="home-header-container" id="about-header">

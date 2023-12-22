@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
 import { getAuth, 
@@ -10,7 +10,6 @@ import { getAuth,
 import firebaseConfig from '../../../firebaseConfig';
 
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
 
 function signInWithGoogle() {
@@ -31,12 +30,28 @@ function RenderLogin() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); 
 
+  const fields = [
+    {
+      id: "floatingEmail", 
+      type: "email", placeholder: "Email", 
+      value: email, 
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)
+    },
+    {
+      id: "floatingPassword", 
+      type: "password", 
+      placeholder: "Password", 
+      value: password, 
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
+    },
+  ]
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/profile");
+      navigate("/profile", {replace: true});
     } catch (error) {
       console.error("Authentication error:", error.message);
     }
@@ -46,9 +61,9 @@ function RenderLogin() {
     const handleRedirectResult = async () => {
       try {
         const result = await getRedirectResult(auth);
-        if (result !== null && result.user) {
+        if (result && result.user) {
           console.log('Google sign-in success:', result.user);
-          navigate("/profile");
+          navigate("/profile", {replace: true});
         } else {
           console.log('No user signed in or there was an issue.');
         }
@@ -69,30 +84,20 @@ function RenderLogin() {
       </div>
       <div className="login-form">
         <form id="login-form" onSubmit={handleSubmit}>
-          <div className="form-floating mb-3">
-            <input
-              className="form-control"
-              type="email"
-              placeholder="Email"
-              id="floatingEmail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="floatingEmail">Email</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              className="form-control"
-              id="floatingPassword"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label htmlFor="floatingPassword">Password</label>
-          </div>
+          {fields.map((field) => (
+            <div className="form-floating mb-3">
+              <input
+                className="form-control"
+                type={field.type}
+                placeholder={field.placeholder}
+                id={field.id}
+                value={field.value}
+                onChange={field.onChange}
+                required
+              />
+              <label htmlFor={field.id}>{field.placeholder}</label>
+            </div>
+          ))}
           <br></br>
           <input
             type="submit"

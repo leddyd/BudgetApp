@@ -119,12 +119,12 @@
     margin-right: 10px;
 }
 
-.expense {
+.Sent {
     background-color: #ffeeee;
     color: #ea443b;
 }
 
-.income {
+.Received {
     background-color: #dcfaee;
     color: #32b37d;
 }

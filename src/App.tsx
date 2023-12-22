@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -6,28 +5,32 @@ import firebaseConfig from "../firebaseConfig";
 import RenderAlert from "./components/signed-out/alert";
 import RenderNonUserNavbar from "./components/signed-out/nonuser-navbar";
 import RenderHome from "./components/signed-out/home";
-import RenderLogin from "./components/signed-out/login";
-import RenderSignUp from "./components/signed-out/signup";
+import RenderLogin from "./components/auth/login";
+import RenderSignUp from "./components/auth/signup";
 import RenderUserNavbar from "./components/signed-in/user-navbar";
 import RenderExpenses from "./components/signed-in/expenses";
 import RenderGoals from "./components/signed-in/goals";
 import RenderAchievements from "./components/signed-in/achievements";
+import { AuthProvider } from "./components/auth/auth";
+import { RequireAuth } from "./components/auth/requireAuth";
+import { ReactNode } from "react";
 
 firebase.initializeApp(firebaseConfig);
 
-function App() {
-  const [user, setUser] = useState<firebase.User | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
-      setUser(authUser);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
+function ProtectedRoute({ element }: { element: ReactNode }) {
   return (
-    <>
+    <RequireAuth>
+      <div className="main-container">
+        <RenderUserNavbar />
+        {element}
+      </div>
+    </RequireAuth>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
       <Routes>
         <Route
           path="/"
@@ -41,43 +44,12 @@ function App() {
         />
         <Route path="/login" element={<RenderLogin />} />
         <Route path="/signup" element={<RenderSignUp />} />
-        <Route
-          path="/profile"
-          element={
-            <div className="main-container">
-              {user ? <RenderUserNavbar /> : null}
-            </div>
-          }
-        />
-        <Route
-          path="/expenses"
-          element={
-            <div className="main-container">
-              {user ? <RenderUserNavbar /> : null}
-              <RenderExpenses />
-            </div>
-          }
-        />
-        <Route
-          path="/goals"
-          element={
-            <div className="main-container">
-              {user ? <RenderUserNavbar /> : null}
-              <RenderGoals />
-            </div>
-          }
-        />
-        <Route
-          path="/achievements"
-          element={
-            <div className="main-container">
-              {user ? <RenderUserNavbar /> : null}
-              <RenderAchievements />
-            </div>
-          }
-        />
+        <Route path="/profile" element={<ProtectedRoute element={<></>} />} />
+        <Route path="/expenses" element={<ProtectedRoute element={<RenderExpenses />} />} />
+        <Route path="/goals" element={<ProtectedRoute element={<RenderGoals />} />} />
+        <Route path="/achievements" element={<ProtectedRoute element={<RenderAchievements />} />} />
       </Routes>
-    </>
+    </AuthProvider>
   );
 }
 
