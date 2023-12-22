@@ -44,4 +44,3 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 }
 
 export default AddTransactionModal;
-

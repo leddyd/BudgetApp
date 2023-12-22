@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import firebaseConfig from '../../../firebaseConfig';  // Adjust the import path
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import firebaseConfig from '../../../firebaseConfig';
 
 const app = initializeApp(firebaseConfig);
 
@@ -21,6 +21,19 @@ function RenderLogin() {
       navigate("/profile");
     } catch (error) {
       console.error("Authentication error:", error.message);
+    }
+  };
+
+  function signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider);
+  }
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.error('Google sign-in error:', error.message);
     }
   };
 
@@ -62,6 +75,10 @@ function RenderLogin() {
             type="submit"
             value="Sign in"
           />
+          <button type="button" className="google-btn" onClick={handleGoogleSignIn}>
+            <img className="google-icon" src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google Icon" />
+            Sign In with Google
+          </button>
         </form>
         <p>
           Don't have an account? <Link to="/signup">Sign Up</Link>
