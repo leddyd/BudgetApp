@@ -1,4 +1,6 @@
 import React, { MouseEventHandler, useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom";
+import { SignUp } from './signup';
 import { Warning } from "../../utils/formEvents";
 
 function RenderHome() {
@@ -50,13 +52,10 @@ function RenderHome() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [warningMsg, SetWarningMsg] = React.useState<string | null>(null);
 
-    const handleSubmit = (e:any) => {
-        e.preventDefault();
-        console.log({firstName, lastName, email, password, confirmPassword});
+    const navigate = useNavigate();
 
-        if (password !== confirmPassword) {
-            SetWarningMsg('Passwords do not match');
-        }
+    const handleSignUpSuccess = () => {
+        navigate("/profile");
     };
 
     return (
@@ -79,72 +78,7 @@ function RenderHome() {
                 <div id="signup-container" className="sticky-top">
                     <h3>Create an account</h3>
                     <p>Start managing your finances by filling out the form below.</p>
-                    <form id="signup-form" onSubmit={handleSubmit}>
-                        <div className="form-floating mb-3">
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                placeholder="First Name" 
-                                id="floatingFirstName" 
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)} 
-                                required 
-                            />
-                            <label htmlFor="floatingFirstName">First Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input 
-                                className="form-control" 
-                                id="floatingLastName"
-                                type="text" 
-                                placeholder="Last Name" 
-                                value={lastName} 
-                                onChange={(e) => setLastName(e.target.value)} 
-                                required 
-                            />
-                            <label htmlFor="floatingLastName">Last Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input 
-                                className="form-control"
-                                id="floatingEmail"
-                                type="email" 
-                                placeholder="Email" 
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}  
-                                required 
-                            />
-                            <label htmlFor="floatingEmail">Email</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input 
-                                className="form-control"
-                                id="floatingPassword"
-                                type="password" 
-                                placeholder="Password" 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} 
-                                required 
-                            />
-                            <label htmlFor="floatingPassword">Password</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input 
-                                className="form-control"
-                                id="floatingConfirmPassword"
-                                type="password" 
-                                placeholder="Confirm Password" 
-                                value={confirmPassword} 
-                                onChange={(e) => setConfirmPassword(e.target.value)} 
-                                required 
-                            />
-                            <label htmlFor="floatingConfirmPassword">Confirm Password</label>
-                        </div>
-                        <input 
-                            type="submit"
-                            value="Submit"
-                        />
-                    </form>
+                    <SignUp onSignUpSuccess={handleSignUpSuccess} />
                     {warningMsg && <Warning msg={warningMsg} />}
                 </div>
             </div>

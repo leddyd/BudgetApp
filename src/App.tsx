@@ -7,6 +7,7 @@ import RenderAlert from "./components/signed-out/alert";
 import RenderNonUserNavbar from "./components/signed-out/nonuser-navbar";
 import RenderHome from "./components/signed-out/home";
 import RenderLogin from "./components/signed-out/login";
+import RenderSignUp from "./components/signed-out/signup";
 import RenderUserNavbar from "./components/signed-in/user-navbar";
 import RenderExpenses from "./components/signed-in/expenses";
 import RenderGoals from "./components/signed-in/goals";
@@ -39,6 +40,7 @@ function App() {
           }
         />
         <Route path="/login" element={<RenderLogin />} />
+        <Route path="/signup" element={<RenderSignUp />} />
         <Route
           path="/profile"
           element={
