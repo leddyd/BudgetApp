@@ -26,7 +26,7 @@
     background-color: #ffffff;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1050px) {
     .google-btn {
       width: 100%;
       margin-bottom: 10px;

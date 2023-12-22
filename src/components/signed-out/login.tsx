@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, 
+  getRedirectResult, 
+  signInWithEmailAndPassword, 
+  signInWithRedirect, 
+  GoogleAuthProvider,  
+  AuthError } from 'firebase/auth';
 import firebaseConfig from '../../../firebaseConfig';
 
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
+
+function signInWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  return signInWithRedirect(auth, provider);
+}
+
+const handleGoogleSignIn = async () => {
+  try {
+    await signInWithGoogle();
+  } catch (error) {
+    console.error('Google sign-in error:', error.message);
+  }
+};
 
 function RenderLogin() {
   const [email, setEmail] = useState('');
@@ -24,18 +42,23 @@ function RenderLogin() {
     }
   };
 
-  function signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
-  }
+  useEffect(() => {
+    const handleRedirectResult = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result !== null && result.user) {
+          console.log('Google sign-in success:', result.user);
+          navigate("/profile");
+        } else {
+          console.log('No user signed in or there was an issue.');
+        }
+      } catch (error) {
+        console.error('Error handling redirect result:', (error as AuthError).code, (error as AuthError).message);
+      }
+    };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (error) {
-      console.error('Google sign-in error:', error.message);
-    }
-  };
+    handleRedirectResult();
+  }, []);
 
   return (
     <>
