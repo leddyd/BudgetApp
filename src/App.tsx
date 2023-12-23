@@ -4,7 +4,7 @@ import "firebase/compat/auth";
 import firebaseConfig from "../firebaseConfig";
 import RenderAlert from "./components/signed-out/alert";
 import RenderNonUserNavbar from "./components/signed-out/nonuser-navbar";
-import RenderHome from "./components/signed-out/home";
+import RenderFrontPage from "./components/signed-out/frontpage";
 import RenderLogin from "./components/auth/login";
 import RenderSignUp from "./components/auth/signup";
 import RenderUserNavbar from "./components/signed-in/user-navbar";
@@ -38,7 +38,7 @@ function App() {
             <div className="wrapper">
               <RenderAlert />
               <RenderNonUserNavbar />
-              <RenderHome />
+              <RenderFrontPage />
             </div>
           }
         />
