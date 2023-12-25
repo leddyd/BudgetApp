@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { addDoc, collection } from "firebase/firestore"; 
+import { setDoc, doc, collection } from "firebase/firestore"; 
 import { getAuth, 
   createUserWithEmailAndPassword, 
   signInWithPopup, 
@@ -56,16 +56,20 @@ import { db } from '../../../firebaseConfig.ts';
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
   
-        const docRef = await addDoc(collection(db, `users/${user.uid}/info`), {
+        const userCollectionRef = collection(db, `users/${user.uid}/info`);
+
+        const infoDocRef = doc(userCollectionRef, 'userInfo');
+    
+        await setDoc(infoDocRef, {
           uid: user.uid,
-          first: firstName,
-          last: lastName,
+          firstName: firstName,
+          lastName: lastName,
           email: user.email,
         });
 
         navigate('/profile', { replace: true });
   
-        console.log("Document written with ID: ", docRef.id);
+        console.log("Document written with ID: info");
 
       } catch (error) {
         console.error('Registration error:', error.message);
@@ -77,14 +81,28 @@ import { db } from '../../../firebaseConfig.ts';
       try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
+
+        let firstName = '';
+        let lastName = '';
+
+        if (user.displayName && user.displayName.includes(' ')) {
+          [firstName, lastName] = user.displayName.split(' ');
+        } else {
+          firstName = user.displayName || '';
+        }
   
-        const docRef = await addDoc(collection(db, `users/${user.uid}/info`), {
+        const userCollectionRef = collection(db, `users/${user.uid}/info`);
+
+        const infoDocRef = doc(userCollectionRef, 'userInfo');
+    
+        await setDoc(infoDocRef, {
           uid: user.uid,
-          name: user.displayName,
+          firstName: firstName,
+          lastName: lastName,
           email: user.email,
         });
   
-        console.log("Document written with ID: ", docRef.id);
+        console.log("Document written with ID: info");
   
         navigate('/profile', { replace: true });
       } catch (error) {
