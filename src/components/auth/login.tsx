@@ -1,16 +1,13 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { initializeApp } from 'firebase/app';
-import { getAuth, 
+import { 
   getRedirectResult, 
   signInWithEmailAndPassword, 
   signInWithRedirect, 
   GoogleAuthProvider,  
-  AuthError } from 'firebase/auth';
-import firebaseConfig from '../../../firebaseConfig';
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+  AuthError 
+} from 'firebase/auth';
+import { auth } from '../../../firebaseConfig';
 
 function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
