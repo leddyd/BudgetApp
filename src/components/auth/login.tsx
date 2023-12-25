@@ -25,6 +25,7 @@ const handleGoogleSignIn = async () => {
 function RenderLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate(); 
 
   const fields = [
@@ -51,6 +52,7 @@ function RenderLogin() {
       navigate("/profile", {replace: true});
     } catch (error) {
       console.error("Authentication error:", error.message);
+      setError("Invalid email or password.");
     }
   };
 
@@ -66,6 +68,7 @@ function RenderLogin() {
         }
       } catch (error) {
         console.error('Error handling redirect result:', (error as AuthError).code, (error as AuthError).message);
+        setError(error.message.replace('Firebase:', '').trim());
       }
     };
 
@@ -95,7 +98,8 @@ function RenderLogin() {
               <label htmlFor={field.id}>{field.placeholder}</label>
             </div>
           ))}
-          <br></br>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error ? null : <br />}
           <input
             type="submit"
             value="Sign in"

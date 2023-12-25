@@ -13,6 +13,7 @@ import { db } from '../../../firebaseConfig.ts';
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const auth = getAuth();
   
@@ -73,6 +74,7 @@ import { db } from '../../../firebaseConfig.ts';
 
       } catch (error) {
         console.error('Registration error:', error.message);
+        setError(error.message.replace('Firebase:', '').trim());
       }
     };
   
@@ -107,6 +109,7 @@ import { db } from '../../../firebaseConfig.ts';
         navigate('/profile', { replace: true });
       } catch (error) {
         console.error('Google sign-up error:', error.message);
+        setError(error.message.replace('Firebase:', '').trim());
       }
     };
   
@@ -114,7 +117,8 @@ import { db } from '../../../firebaseConfig.ts';
       e.preventDefault();
   
       if (password !== confirmPassword) {
-        console.error('Passwords do not match');
+        console.error('Passwords do not match.');
+        setError('Passwords do not match.');
         return;
       }
       onSignUpSuccess();
@@ -136,7 +140,8 @@ import { db } from '../../../firebaseConfig.ts';
             <label htmlFor={field.id}>{field.placeholder}</label>
           </div>
         ))}
-        <br />
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error ? null : <br />}
         <input type="submit" value="Sign Up" />
         <button type="button" className="google-btn" onClick={handleGoogleSignUp}>
           <img className="google-icon" src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google Icon" />
