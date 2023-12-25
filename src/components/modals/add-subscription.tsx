@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { addDoc, collection } from 'firebase/firestore'; 
-import { db } from '../../../firebaseConfig.ts'; 
+import { db, auth } from '../../../firebaseConfig.ts'; 
 
 interface AddSubscriptionModalProps {
   onClose: () => void;
@@ -13,7 +13,15 @@ const AddSubscriptionModal: React.FC<AddSubscriptionModalProps> = ({ onClose }) 
 
   const handleSave = async () => {
     try {
-      const docRef = await addDoc(collection(db, 'subscriptions'), {
+        
+      const userId = auth.currentUser?.uid;
+
+      if (!userId) {
+        console.error('User not authenticated');
+        return;
+      }
+
+      const docRef = await addDoc(collection(db, `users/${userId}/subscriptions`), {
         note,
         amount: parseFloat(amount), 
         createdAt: new Date(),
