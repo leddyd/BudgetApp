@@ -54,7 +54,7 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
           .attr('transform', `translate(5, -1)`);
       });
 
-    var legendG = svg.selectAll(".legend")
+    const legendG = svg.selectAll(".legend")
       .data(pie(data))
       .enter().append("g")
       .attr('transform', function (d, i) {
@@ -87,5 +87,3 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
 };
 
 export default PieChart;
-
-

@@ -56,16 +56,17 @@ import { db } from '../../../firebaseConfig.ts';
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
   
-        const docRef = await addDoc(collection(db, "users"), {
+        const docRef = await addDoc(collection(db, `users/${user.uid}/info`), {
           uid: user.uid,
           first: firstName,
           last: lastName,
           email: user.email,
         });
+
+        navigate('/profile', { replace: true });
   
         console.log("Document written with ID: ", docRef.id);
-        
-        navigate('/profile', { replace: true });
+
       } catch (error) {
         console.error('Registration error:', error.message);
       }
@@ -77,9 +78,9 @@ import { db } from '../../../firebaseConfig.ts';
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
   
-        const docRef = await addDoc(collection(db, "users"), {
+        const docRef = await addDoc(collection(db, `users/${user.uid}/info`), {
           uid: user.uid,
-          first: user.displayName,
+          name: user.displayName,
           email: user.email,
         });
   
