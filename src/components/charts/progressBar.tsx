@@ -6,7 +6,7 @@ const budget = 500;
 
 const margin = {
   top: 45,
-  right: 270,
+  right: 0,
   bottom: 70,
   left: 0,
 };
@@ -23,7 +23,7 @@ class ProgressBar extends React.Component {
   }
 
   render(): JSX.Element {
-    const parentWidth = 950;
+    const parentWidth = 675;
     const { data } = this.state;
 
     const width = parentWidth - margin.left - margin.right;
@@ -33,7 +33,7 @@ class ProgressBar extends React.Component {
       .range([0, width]);
 
     return (
-      <div>
+      <>
         <svg
           width={width + margin.left + margin.right}
           height={svgHeight}
@@ -54,11 +54,8 @@ class ProgressBar extends React.Component {
               }}
             />
           </g>
-          <g transform={`translate(${width}, ${svgHeight/2 - 16})`}>
-              
-          </g>
         </svg>
-      </div>
+      </>
     );
   }
 }

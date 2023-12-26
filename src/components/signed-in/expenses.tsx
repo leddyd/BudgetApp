@@ -4,6 +4,7 @@ import ProgressBar from '../charts/progressBar';
 import AddTransactionModal from '../modals/add-transaction';
 import AddSubscriptionModal from '../modals/add-subscription';
 import { getAllMonths, getCurrentMonth } from '../../utils/dateUtils';
+import WantsMeter from '../charts/wantsMeter';
 
 interface Datum {
     label: string;
@@ -74,6 +75,9 @@ function RenderExpenses() {
                 <div className="progress-container">
                     <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your budget</p>
                     <ProgressBar />
+                </div>
+                <div className="meter-container">
+                    <WantsMeter />
                 </div>
             </div>
             <div className="viz-container">
