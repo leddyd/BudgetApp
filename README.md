@@ -6,21 +6,23 @@ Web development project for tracking and minimizing expenses using react (typesc
 Node.js 20.10.0 LTS
 React + Vite
 D3.js
+Firebase
 ```
 
 # Commands
-To run the application
+Install NodeJs
 ```
-npm run dev
+The latest installation can be found at https://nodejs.org/en
+Make sure to also install node package manager
 ```
 
-To install dependencies
+Install dependencies
 ```
-NodeJS:
-The latest node installation can be found at https://nodejs.org/en
-Make sure to also install node package manager (npm)
+1. Navigate to the project
+2. Enter npm install
 ```
+
+Run the development environment
 ```
-D3:
-npm install d3
+npm run dev
 ```
