@@ -4,7 +4,7 @@ import React, { RefObject } from "react";
 interface ExpenditureBarProps {
   xScale: ScaleLinear<number, number>; 
   barHeight: number; 
-  total: number;
+  budget: number;
   data: { [key: string]: number };
 }
 
@@ -25,77 +25,45 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
   }
 
   init() {
-    const { xScale, barHeight, data } = this.props;
+    const { xScale, barHeight } = this.props;
     const node = this.ref.current;
-    const sortedCategories = Object.keys(data).sort((a, b) => data[a] - data[b]);
-  
-    sortedCategories.forEach((category) => {
-      const rect = select(node)
-        .append('rect')
-        .attr('class', `bar-${category}`)
-        .attr('x', 0)
-        .attr('y', 0)
-        .attr('width', 0)
-        .attr('height', barHeight)
-        .on('mouseover', function () {
-          if (category === 'needs') {
-            select(this).attr('fill', '#246896');
-            select('.needs-legend-label').transition()
-              .duration(200)
-              .attr('transform', 'translate(5, 0)');
-          } else {
-            select(this).attr('fill', '#2c8f2c');
-            select('.wants-legend-label').transition()
-              .duration(200)
-              .attr('transform', 'translate(5, 0)');
-          }
-        })
-        .on('mouseout', function () {
-          if (category === 'needs') {
-            select(this).attr('fill', '#1f77b4');
-            select('.needs-legend-label').transition()
-              .duration(200)
-              .attr('transform', 'translate(0, 0)');
-          } else {
-            select(this).attr('fill', '#2ca02c');
-            select('.wants-legend-label').transition()
-              .duration(200)
-              .attr('transform', 'translate(0, 0)');
-          }
-        })
-        .attr('fill', category === 'needs' ? 'blue' : 'green');
-    });
-  
+
+    select(node)
+      .append('rect')
+      .attr('class', 'bar')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('rx', barHeight / 2)
+      .attr('ry', barHeight / 2)
+      .attr('width', 0)
+      .attr('height', barHeight)
+      .attr('fill', '#8f33ff');
+
     select(node)
       .append('text')
-      .attr('class', `amount-left fw-medium text-muted`)
+      .attr('class', 'amount fw-medium text-muted')
       .attr('x', 0)
       .attr('y', barHeight)
       .attr('dx', -10)
       .attr('dy', 20);
-  
+
     this.barTransition();
   }
 
   barTransition() {
-    const { xScale, total, data } = this.props;
+    const { data, xScale, budget } = this.props;
     const t = transition().duration(800);
-    const sortedCategories = Object.keys(data).sort((a, b) => data[b] - data[a]);
+    const total = data.needs + data.wants;
 
-    let spentWidth = 0;
-    sortedCategories.forEach((category, i) => {
-      select(`.bar-${category}`)
-        .transition(t)
-        .attr('fill', category === 'needs' ? 'blue' : 'green')
-        .attr('width', xScale(Math.min(data[category] + spentWidth, total)));
+    select('.bar')
+      .transition(t)
+      .attr('fill', total > budget ? 'red' : '#8f33ff')
+      .attr('width', xScale(Math.min(total, budget)));
 
-      spentWidth += data[category];
-    });
-
-    select(`.amount-left`)
-        .transition(t)
-        .attr('x', xScale(Math.min(spentWidth, total)))
-        .text(`\$${spentWidth} of \$${total} spent`);
+    select('.amount')
+      .transition(t)
+      .attr('x', xScale(Math.min(total, budget)))
+      .text(`\$${total} of \$${budget} spent`);
   }
 
   render() {
