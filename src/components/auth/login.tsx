@@ -109,7 +109,7 @@ function RenderLogin() {
             Sign In with Google
           </button>
         </form>
-        <p>
+        <p id="link-to-signup">
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
       </div>

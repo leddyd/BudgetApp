@@ -49,3 +49,7 @@
     flex-direction: column;
     align-items: center;
 }
+
+#link-to-signup {
+    text-align: center;
+}
