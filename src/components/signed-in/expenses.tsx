@@ -3,6 +3,7 @@ import PieChart from '../charts/expensePieChart';
 import ProgressBar from '../charts/progressBar';
 import AddTransactionModal from '../modals/add-transaction';
 import AddSubscriptionModal from '../modals/add-subscription';
+import { getAllMonths, getCurrentMonth } from '../../utils/dateUtils';
 
 interface Datum {
     label: string;
@@ -34,6 +35,7 @@ var subscriptions = [
 function RenderExpenses() {
     const [showTransactionModal, setShowTransactionModal] = useState(false);
     const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+    const [displayMonth, setDisplayMonth] = useState(getCurrentMonth);
 
     const toggleSubscriptionModal = () => {
         setShowSubscriptionModal(!showSubscriptionModal);
@@ -42,6 +44,10 @@ function RenderExpenses() {
     const toggleTransactionModal = () => {
         setShowTransactionModal(!showTransactionModal);
     };
+
+    const handleMonthChange = (newMonth:string) => {
+        setDisplayMonth(newMonth);
+    }
 
     return (
         <div className="app-page-container">
@@ -79,13 +85,12 @@ function RenderExpenses() {
                                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle " href="#" role="button" aria-expanded="false">
-                                            December
+                                            {displayMonth}
                                         </a>
                                         <ul className="dropdown-menu dropdown-menu-end">
-                                            <li><a className="dropdown-item" href="#">Action</a></li>
-                                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                                            <li><hr className="dropdown-divider" /></li>
-                                            <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                            {getAllMonths().map((month) => (
+                                                <li><a className="dropdown-item" href="#" onClick={() => handleMonthChange(month)}>{month}</a></li>
+                                            ))}
                                         </ul>
                                     </li>
                                 </ul>
