@@ -117,8 +117,8 @@ function RenderExpenses() {
                     </div>
                     <div className='expenses-list-group-container'>
                         <ol className="list-group">
-                            {transactions.map((t) => (
-                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                            {transactions.map((t, index) => (
+                                <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                                     <div className="expense-category-indicator"></div>
                                     <div className="ms-2 me-auto small">
                                         <div className="fw-bold">{t.party}</div>
@@ -145,8 +145,8 @@ function RenderExpenses() {
                     </div>
                     <div className='expenses-list-group-container'>
                         <ol className="list-group">
-                        {subscriptions.map((s) => (
-                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                        {subscriptions.map((s, index) => (
+                                <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                                     <div className="expense-category-indicator"></div>
                                     <div className="ms-2 me-auto small">
                                         <div className="fw-bold">{s.party}</div>

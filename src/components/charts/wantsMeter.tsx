@@ -82,7 +82,7 @@ export default class WantsMeter extends Component<{}, { [key: string]: number }>
 
         select(node)
         .append('text')
-        .attr('class', 'fw-medium text-muted small')
+        .attr('class', 'text-muted small')
         .style('text-rendering', 'optimizeLegibility')
         .attr('text-anchor', 'middle')
         .attr('dy', '2em')

@@ -35,6 +35,10 @@
     color: black;
 }
 
+.user-nav-link:focus {
+    color: black;
+}
+
 .user-nav-link i {
     font-size: 1.25rem;
 }
