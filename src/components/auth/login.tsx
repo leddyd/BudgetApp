@@ -49,7 +49,7 @@ function RenderLogin() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/profile", {replace: true});
+      navigate("/expenses", {replace: true});
     } catch (error) {
       console.error("Authentication error:", error.message);
       setError("Invalid email or password.");
@@ -62,7 +62,7 @@ function RenderLogin() {
         const result = await getRedirectResult(auth);
         if (result && result.user) {
           console.log('Google sign-in success:', result.user);
-          navigate("/profile", {replace: true});
+          navigate("/expenses", {replace: true});
         } else {
           console.log('No user signed in or there was an issue.');
         }

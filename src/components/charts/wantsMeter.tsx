@@ -38,7 +38,7 @@ export default class WantsMeter extends Component<{}, { [key: string]: number }>
         select(node)
             .attr("width", width)
             .attr("height", height)
-            .attr("transform", `translate(${width / 2}, ${height / 2})`);
+            .attr("transform", `translate(${width / 2}, ${height / 1.75})`);
 
         const color: d3.ScaleOrdinal<string, string> = d3.scaleOrdinal<string>()
             .domain(Object.keys(this.state))
@@ -86,7 +86,7 @@ export default class WantsMeter extends Component<{}, { [key: string]: number }>
         .style('text-rendering', 'optimizeLegibility')
         .attr('text-anchor', 'middle')
         .attr('dy', '2em')
-        .style('font-size', '14px') 
+        .style('font-size', '14px')
         .text("of your expenses are wants");
     }
     

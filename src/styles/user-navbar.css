@@ -2,6 +2,7 @@
     width: 5%;
     background-color: black;
     flex-direction: column;
+    transition: width .5s ease;
 }
 
 .user-nav {
@@ -21,11 +22,12 @@
 .user-nav-item {
     margin-top: 10px;
     margin-bottom: 10px;
-    aspect-ratio: 1/1;
+    
 }
 
 .user-nav-link {
     color: black;
+    height: 100%;
 }
 
 .user-nav-link:hover {
@@ -34,12 +36,39 @@
 }
 
 .user-nav-link i {
-    margin: auto;
     font-size: 1.25rem;
 }
 
+.user-nav-link span {
+    margin: 0;
+    visibility: hidden; 
+    transition: visibility .5s ease; 
+  }
+
 .home-tab {
     flex-grow: 1;
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: end;
+}
+
+.expanded {
+    width: 10%;
+}
+
+.icon-contracted {
+    margin: auto;
+}
+
+.icon-expanded {
+    margin-right: 10px;
+}
+
+.link-expanded {
+    width: 98%;
+}
+
+.user-nav-link span.visible {
+    visibility: visible;
 }
