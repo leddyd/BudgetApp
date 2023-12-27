@@ -9,13 +9,14 @@ D3.js
 Firebase
 ```
 
-# Commands
+# Prerequisites
 Install NodeJs
 ```
 The latest installation can be found at https://nodejs.org/en
 Make sure to also install node package manager
 ```
 
+# Commands
 Install dependencies
 ```
 1. Navigate to the project
