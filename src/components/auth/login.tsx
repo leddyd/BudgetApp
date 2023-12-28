@@ -9,7 +9,7 @@ import {
   setPersistence,
   browserSessionPersistence
 } from 'firebase/auth';
-import { auth } from '../../../firebaseConfig';
+import { auth } from '../../config/firebaseConfig';
 
 function signInWithGoogle() {
   const provider = new GoogleAuthProvider();

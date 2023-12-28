@@ -1,5 +1,5 @@
 import { collection, getDocs, query, DocumentData, doc, getDoc } from 'firebase/firestore';
-import { db, auth } from '../../firebaseConfig.ts';
+import { db, auth } from '../config/firebaseConfig.ts';
 
 export const fetchTransactions = async (): Promise<DocumentData[]> => {
     try {

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import firebaseConfig from "../firebaseConfig";
+import firebaseConfig from "./config/firebaseConfig";
 import RenderAlert from "./components/alert";
 import RenderNonUserNavbar from "./components/nonuser-navbar";
 import RenderFrontPage from "./pages/frontpage";

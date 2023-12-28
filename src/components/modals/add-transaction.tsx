@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Dropdown } from 'react-bootstrap';
 import { addDoc, collection } from 'firebase/firestore'; 
-import { db, auth } from '../../../firebaseConfig.ts'; 
+import { db, auth } from '../../config/firebaseConfig.ts'; 
 
 interface AddTransactionModalProps {
     onClose: () => void;

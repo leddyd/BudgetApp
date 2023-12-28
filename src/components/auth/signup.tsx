@@ -5,7 +5,7 @@ import { getAuth,
   createUserWithEmailAndPassword, 
   signInWithPopup, 
   GoogleAuthProvider, } from 'firebase/auth';
-import { db } from '../../../firebaseConfig.ts';
+import { db } from '../../config/firebaseConfig.ts';
 
   export function SignUp() {
     const [firstName, setFirstName] = useState('');
