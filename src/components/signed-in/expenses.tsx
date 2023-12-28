@@ -115,8 +115,8 @@ const data: Datum[] = [
                                             {displayMonth}
                                         </a>
                                         <ul className="dropdown-menu dropdown-menu-end">
-                                            {getAllMonths().map((month) => (
-                                                <li><a className="dropdown-item" href="#" onClick={() => handleMonthChange(month)}>{month}</a></li>
+                                            {getAllMonths().map((month, index) => (
+                                                <li key={index}><a className="dropdown-item" href="#" onClick={() => handleMonthChange(month)}>{month}</a></li>
                                             ))}
                                         </ul>
                                     </li>

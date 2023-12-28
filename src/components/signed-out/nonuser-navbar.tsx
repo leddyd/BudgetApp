@@ -32,8 +32,8 @@ function RenderNonUserNavbar() {
               WeGonBudget
             </Link>
             <ul className="nav nav-pills">
-              {pills.map((pill) => (
-                  <li className="nonuser-nav-item nav-item">
+              {pills.map((pill, index) => (
+                  <li key={index} className="nonuser-nav-item nav-item">
                     <a 
                       className="nonuser-nav-link nav-link"
                       onClick={(e) => {

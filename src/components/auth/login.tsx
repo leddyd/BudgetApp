@@ -5,7 +5,9 @@ import {
   signInWithEmailAndPassword, 
   signInWithRedirect, 
   GoogleAuthProvider,  
-  AuthError 
+  AuthError, 
+  setPersistence,
+  browserSessionPersistence
 } from 'firebase/auth';
 import { auth } from '../../../firebaseConfig';
 
@@ -48,6 +50,7 @@ function RenderLogin() {
     e.preventDefault();
 
     try {
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/expenses", {replace: true});
     } catch (error) {
@@ -56,7 +59,7 @@ function RenderLogin() {
     }
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     const handleRedirectResult = async () => {
       try {
         const result = await getRedirectResult(auth);
@@ -73,7 +76,7 @@ function RenderLogin() {
     };
 
     handleRedirectResult();
-  }, []);
+  }, []);*/
 
   return (
     <>
@@ -84,8 +87,8 @@ function RenderLogin() {
       </div>
       <div className="login-form">
         <form id="login-form" onSubmit={handleSubmit}>
-          {fields.map((field) => (
-            <div className="form-floating mb-3">
+          {fields.map((field, index) => (
+            <div key={index} className="form-floating mb-3">
               <input
                 className="form-control"
                 type={field.type}
