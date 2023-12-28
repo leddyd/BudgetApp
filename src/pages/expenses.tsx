@@ -97,7 +97,7 @@ const data: Datum[] = [
                 </div>
                 <div className="progress-container">
                     <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your budget</p>
-                    <ProgressBar />
+                    <ProgressBar budget={250} transactions={transactions} />
                 </div>
                 <div className="meter-container">
                     <WantsMeter />

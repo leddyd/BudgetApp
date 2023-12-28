@@ -1,11 +1,12 @@
 import { ScaleLinear, select, transition } from "d3";
+import { DocumentData } from "firebase/firestore";
 import React, { RefObject } from "react";
 
 interface ExpenditureBarProps {
   xScale: ScaleLinear<number, number>; 
   barHeight: number; 
   budget: number;
-  data: { [key: string]: number };
+  transactions: DocumentData[];
 }
 
 class ExpenditureBar extends React.Component<ExpenditureBarProps> {
@@ -51,9 +52,9 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
   }
 
   barTransition() {
-    const { data, xScale, budget } = this.props;
+    const { transactions, xScale, budget } = this.props;
     const t = transition().duration(800);
-    const total = data.needs + data.wants;
+    const total = transactions.reduce((n, {amount}) => n + amount, 0);;
 
     select('.bar')
       .transition(t)

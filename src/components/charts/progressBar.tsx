@@ -1,8 +1,7 @@
 import React from 'react';
 import { scaleLinear } from 'd3';
 import ExpenditureBar from './expenditureBar';
-
-const budget = 500;
+import { DocumentData } from 'firebase/firestore';
 
 const margin = {
   top: 45,
@@ -14,20 +13,21 @@ const margin = {
 const barHeight = 20;
 const svgHeight = 113;
 
-class ProgressBar extends React.Component {
-  state = {
-    data: {
-      needs: 50,
-      wants: 25,
-    }
+interface ProgressBarProps {
+  transactions: DocumentData[],
+  budget: number;
+}
+
+class ProgressBar extends React.Component<ProgressBarProps> {
+  getRemaining(): number {
+    const { transactions } = this.props;
+    return transactions.reduce((n, {amount}) => n + amount, 0);
   }
 
   render(): JSX.Element {
     const parentWidth = 675;
-    const { data } = this.state;
-
     const width = parentWidth - margin.left - margin.right;
-
+    const {budget, transactions} = this.props;
     const xScale = scaleLinear()
       .domain([0, budget])
       .range([0, width]);
@@ -42,7 +42,7 @@ class ProgressBar extends React.Component {
             <g className="budget-bar-group">
               <rect x="0" y="0" rx={10} ry={10} width={width} height={barHeight} opacity="0.2"/>
               <text x="0" y="0" dy="-10" dx="0" className='fw-medium text-muted'>
-                ${budget - (data.needs + data.wants)} left
+                ${budget - this.getRemaining()} left
               </text>
             </g>
             <ExpenditureBar
@@ -50,7 +50,7 @@ class ProgressBar extends React.Component {
                 xScale,
                 barHeight,
                 budget,
-                data,
+                transactions,
               }}
             />
           </g>
