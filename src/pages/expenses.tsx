@@ -72,7 +72,7 @@ const data: Datum[] = [
   
       fetchData();
     }, []);
-
+   
     return (
         <div className="app-page-container">
             <div className="header-container hidden">
@@ -84,12 +84,22 @@ const data: Datum[] = [
                     <h2 className="fw-bold">$530,000.50</h2>
                     <div className="income-spending-container">
                         <div className="income-container">
-                            <small className="fw-medium">$500</small>
+                            <small className="fw-medium">
+                              $
+                              {transactions.filter((t) => {
+                                return t.transactionType === "Received" 
+                              }).reduce((n, {amount}) => n + amount, 0)}
+                            </small>
                             <br />
                             <small className="fw-medium text-muted">Month's Income</small>
                         </div>
                         <div className="spending-container">
-                            <small className="fw-medium">$500</small>
+                            <small className="fw-medium">
+                              $
+                              {transactions.filter((t) => {
+                                return t.transactionType === "Sent" 
+                              }).reduce((n, {amount}) => n + amount, 0)}
+                            </small>
                             <br />
                             <small className="fw-medium text-muted">Month's Spending</small>
                         </div>
