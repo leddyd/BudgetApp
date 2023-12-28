@@ -1,5 +1,5 @@
 import React from 'react';
-import { scaleLinear, scaleOrdinal, schemeCategory10 } from 'd3';
+import { scaleLinear } from 'd3';
 import ExpenditureBar from './expenditureBar';
 
 const budget = 500;

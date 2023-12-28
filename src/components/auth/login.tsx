@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { 
   getRedirectResult, 
@@ -59,24 +59,24 @@ function RenderLogin() {
     }
   };
 
-  useEffect(() => {
-    const handleRedirectResult = async () => {
-      try {
-        const result = await getRedirectResult(auth);
-        if (result && result.user) {
-          console.log('Google sign-in success:', result.user);
-          navigate("/expenses", {replace: true});
-        } else {
-          console.log('No user signed in or there was an issue.');
-        }
-      } catch (error) {
-        console.error('Error handling redirect result:', (error as AuthError).code, (error as AuthError).message);
-        setError(error.message.replace('Firebase:', '').trim());
+  const handleRedirectResult = useCallback(async () => {
+    try {
+      const result = await getRedirectResult(auth);
+      if (result && result.user) {
+        console.log('Google sign-in success:', result.user);
+        navigate("/expenses", { replace: true });
+      } else {
+        console.log('No user signed in or there was an issue.');
       }
-    };
+    } catch (error) {
+      console.error('Error handling redirect result:', (error as AuthError).code, (error as AuthError).message);
+      setError(error.message.replace('Firebase:', '').trim());
+    }
+  }, [navigate]);
 
+  useEffect(() => {
     handleRedirectResult();
-  }, []);
+  }, [handleRedirectResult]);
 
   return (
     <>

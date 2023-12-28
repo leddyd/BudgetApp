@@ -25,7 +25,7 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
   }
 
   init() {
-    const { xScale, barHeight } = this.props;
+    const { barHeight } = this.props;
     const node = this.ref.current;
 
     select(node)
@@ -63,7 +63,7 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
     select('.amount')
       .transition(t)
       .attr('x', xScale(Math.min(total, budget)))
-      .text(`\$${total} of \$${budget} spent`);
+      .text(`${total} of ${budget} spent`);
   }
 
   render() {
