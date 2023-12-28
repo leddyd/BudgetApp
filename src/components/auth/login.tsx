@@ -59,7 +59,7 @@ function RenderLogin() {
     }
   };
 
-  /*useEffect(() => {
+  useEffect(() => {
     const handleRedirectResult = async () => {
       try {
         const result = await getRedirectResult(auth);
@@ -76,7 +76,7 @@ function RenderLogin() {
     };
 
     handleRedirectResult();
-  }, []);*/
+  }, []);
 
   return (
     <>
