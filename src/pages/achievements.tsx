@@ -1,4 +1,4 @@
-import LineChart from "../charts/lineChart"
+import LineChart from "../components/charts/lineChart"
 
 function RenderAchievements() {
     return (

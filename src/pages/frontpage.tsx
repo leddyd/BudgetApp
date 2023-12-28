@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { SignUp } from '../auth/signup';
+import { SignUp } from '../components/auth/signup';
 
 function RenderFrontPage() {
     const cards = [

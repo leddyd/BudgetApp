@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import PieChart from '../charts/expensePieChart';
-import ProgressBar from '../charts/progressBar';
-import AddTransactionModal from '../modals/add-transaction';
-import AddSubscriptionModal from '../modals/add-subscription';
-import { fetchSubscriptions, fetchTransactions } from '../../utils/fetchData'
-import { getAllMonths, getCurrentMonth } from '../../utils/dateUtils';
-import WantsMeter from '../charts/wantsMeter';
+import PieChart from '../components/charts/expensePieChart';
+import ProgressBar from '../components/charts/progressBar';
+import AddTransactionModal from '../components/modals/add-transaction';
+import AddSubscriptionModal from '../components/modals/add-subscription';
+import { fetchSubscriptions, fetchTransactions } from '../utils/fetchData'
+import { getAllMonths, getCurrentMonth } from '../utils/dateUtils';
+import WantsMeter from '../components/charts/wantsMeter';
 import { DocumentData } from 'firebase/firestore';
 
 interface Datum {

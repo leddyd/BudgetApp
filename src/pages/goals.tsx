@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddGoalModal from "../modals/add-goal";
+import AddGoalModal from "../components/modals/add-goal";
 
 function RenderGoals() {
     const [debtValue, setDebtValue] = useState(25);

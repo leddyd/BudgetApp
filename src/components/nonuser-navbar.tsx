@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { ChangeIcon } from "../../utils/mouseEvents";
+import { ChangeIcon } from "../utils/mouseEvents";
 
 function CapitalizeFirst(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1)
