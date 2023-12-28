@@ -3,11 +3,10 @@ import PieChart from '../charts/expensePieChart';
 import ProgressBar from '../charts/progressBar';
 import AddTransactionModal from '../modals/add-transaction';
 import AddSubscriptionModal from '../modals/add-subscription';
+import { fetchSubscriptions, fetchTransactions } from '../../utils/fetchData'
 import { getAllMonths, getCurrentMonth } from '../../utils/dateUtils';
 import WantsMeter from '../charts/wantsMeter';
-import { collection, getDocs, query, DocumentData } from 'firebase/firestore';
-import { db, auth } from '../../../firebaseConfig.ts';
-
+import { DocumentData } from 'firebase/firestore';
 
 interface Datum {
     label: string;
@@ -19,42 +18,6 @@ const data: Datum[] = [
     { label: 'Bills', value: 50 },
     { label: 'Restaurants', value: 20 },
 ];
-
-export const fetchTransactions = async () => {
-    try {
-
-      const userId = auth.currentUser?.uid;
-
-      const transactionsCollection = collection(db, `users/${userId}/transactions`);
-      const transactionsQuery = query(transactionsCollection);
-  
-      const transactionsSnapshot = await getDocs(transactionsQuery);
-      const transactionsData = transactionsSnapshot.docs.map((doc) => doc.data());
-  
-      return transactionsData;
-    } catch (error) {
-      console.error('Error fetching transactions:', error.message);
-      return [];
-    }
-  };
-  
-  export const fetchSubscriptions = async () => {
-    try {
-
-      const userId = auth.currentUser?.uid;
-
-      const subscriptionsCollection = collection(db, `users/${userId}/subscriptions`);
-      const subscriptionsQuery = query(subscriptionsCollection);
-  
-      const subscriptionsSnapshot = await getDocs(subscriptionsQuery);
-      const subscriptionsData = subscriptionsSnapshot.docs.map((doc) => doc.data());
-  
-      return subscriptionsData;
-    } catch (error) {
-      console.error('Error fetching subscriptions:', error.message);
-      return [];
-    }
-  };
 
   function RenderExpenses() {
     const [showTransactionModal, setShowTransactionModal] = useState(false);
