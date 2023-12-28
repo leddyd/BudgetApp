@@ -5,9 +5,10 @@ import { db, auth } from '../../../firebaseConfig.ts';
 
 interface AddSubscriptionModalProps {
   onClose: () => void;
+  onSubscriptionAdded: () => void;
 }
 
-const AddSubscriptionModal: React.FC<AddSubscriptionModalProps> = ({ onClose }) => {
+const AddSubscriptionModal: React.FC<AddSubscriptionModalProps> = ({ onClose,  onSubscriptionAdded}) => {
   const [note, setNote] = useState('');
   const [amount, setAmount] = useState('');
 
@@ -28,7 +29,8 @@ const AddSubscriptionModal: React.FC<AddSubscriptionModalProps> = ({ onClose }) 
       });
 
       console.log('Subscription added with ID: ', docRef.id);
-      onClose(); 
+      onClose();
+      onSubscriptionAdded(); 
     } catch (error) {
       console.error('Error adding subscription: ', error);
     }

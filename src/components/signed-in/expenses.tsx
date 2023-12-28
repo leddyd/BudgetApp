@@ -74,16 +74,32 @@ export const fetchTransactions = async () => {
     const handleMonthChange = (newMonth: string) => {
       setDisplayMonth(newMonth);
     };
+
+    const handleSubscriptionAdded = async () => {
+      try{
+        console.log('Subscription added. Refreshing subscription data...');
+        const newSubscriptionsData = await fetchSubscriptions();
+        setSubscriptions(newSubscriptionsData);
+      } catch (error) {
+        console.error("Error refreshing subscription data");
+      }
+    };
+
+    const handleTransactionAdded = async () => {
+      try {
+        console.log('Transaction added. Refreshing transaction data...');
+        const newTransactionsData = await fetchTransactions();
+        setTransactions(newTransactionsData);    
+      } catch (error) {
+        console.error("Error refreshing transaction data");
+      }
+    };
   
     useEffect(() => {
       const fetchData = async () => {
         try {
           const transactionsData = await fetchTransactions();
           const subscriptionsData = await fetchSubscriptions();
-
-         console.log('Transactions Data:', transactionsData);
-          console.log('Subscriptions Data:', subscriptionsData);
-
           setTransactions(transactionsData);
           setSubscriptions(subscriptionsData);
        } catch (error) {
@@ -107,12 +123,12 @@ export const fetchTransactions = async () => {
                         <div className="income-container">
                             <small className="fw-medium">$500</small>
                             <br />
-                            <small className="fw-medium text-muted">Week's Income</small>
+                            <small className="fw-medium text-muted">Month's Income</small>
                         </div>
                         <div className="spending-container">
                             <small className="fw-medium">$500</small>
                             <br />
-                            <small className="fw-medium text-muted">Week's Spending</small>
+                            <small className="fw-medium text-muted">Month's Spending</small>
                         </div>
                     </div>
                 </div>
@@ -156,7 +172,7 @@ export const fetchTransactions = async () => {
                       <button type="button" className="btn add-goal-btn" onClick={toggleTransactionModal}>
                         <i className="bi bi-plus"></i>
                       </button>
-                      {showTransactionModal && <AddTransactionModal onClose={toggleTransactionModal} />}
+                      {showTransactionModal && <AddTransactionModal onClose={toggleTransactionModal} onTransactionAdded={handleTransactionAdded} />}
                     </div>
                   </div>
                   <div className='expenses-list-group-container'>
@@ -184,7 +200,7 @@ export const fetchTransactions = async () => {
                             <button type="button" className="btn add-goal-btn" onClick={toggleSubscriptionModal}>
                                 <i className="bi bi-plus"></i>
                             </button>
-                            {showSubscriptionModal && <AddSubscriptionModal onClose={toggleSubscriptionModal} />}
+                            {showSubscriptionModal && <AddSubscriptionModal onClose={toggleSubscriptionModal} onSubscriptionAdded={handleSubscriptionAdded} />}
                         </div>
                     </div>
                     <div className='expenses-list-group-container'>

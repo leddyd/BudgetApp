@@ -5,9 +5,10 @@ import { db, auth } from '../../../firebaseConfig.ts';
 
 interface AddTransactionModalProps {
     onClose: () => void;
+    onTransactionAdded: () => void;
 }
 
-const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) => {
+const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, onTransactionAdded }) => {
     const [note, setNote] = useState('');
     const [transactionType, setTransactionType] = useState('Sent');
     const [amount, setAmount] = useState('');
@@ -31,6 +32,7 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose }) =>
 
             console.log('Transaction added with ID: ', docRef.id);
             onClose(); 
+            onTransactionAdded();
         } catch (error) {
             console.error('Error adding transaction: ', error);
         }
