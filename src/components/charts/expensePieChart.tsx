@@ -26,7 +26,7 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
     const dict: CategoryDict = {};
     let total = 0;
     
-    for (const d of data.filter((d) => d.category !== 'NA')) {
+    for (const d of data.filter((d) => d.category !== 'Expense category')) {
       const { category, amount } = d;
       dict[category] = (dict[category] ?? 0) + amount;
       total += amount;

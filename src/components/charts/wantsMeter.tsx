@@ -27,16 +27,21 @@ export default class WantsMeter extends Component<WantsMeterProps, WantsMeterSta
     constructor(props: WantsMeterProps) {
         super(props);
         this.ref = React.createRef();
+        
+        const wantsTotal = props.transactions
+        .filter((t) => !needs.includes(t.category) && t.category !== "Expense category")
+        .reduce((n, { amount }) => n + amount, 0);
+
+        const needsTotal = props.transactions
+        .filter((t) => needs.includes(t.category) && t.category !== "Expense category")
+        .reduce((n, { amount }) => n + amount, 0);
+
         this.state = {
-            total: props.transactions.reduce((n, { amount }) => n + amount, 0),
             categories: {
-              wants: props.transactions
-                .filter((t) => !needs.includes(t.category))
-                .reduce((n, { amount }) => n + amount, 0),
-              needs: props.transactions
-                .filter((t) => needs.includes(t.category))
-                .reduce((n, { amount }) => n + amount, 0),
+                wants: wantsTotal,
+                needs: needsTotal,
             },
+            total: wantsTotal + needsTotal,
         };
     }
 
@@ -59,7 +64,7 @@ export default class WantsMeter extends Component<WantsMeterProps, WantsMeterSta
             .attr("width", width)
             .attr("height", height)
             .attr("transform", `translate(${width / 2}, ${height / 1.75})`);
-
+        
         const color: d3.ScaleOrdinal<string, string> = d3.scaleOrdinal<string>()
             .domain(Object.keys(this.state.categories))
             .range(["#FF7F0E", "#8F33FF"]);
@@ -81,7 +86,7 @@ export default class WantsMeter extends Component<WantsMeterProps, WantsMeterSta
 
     build() {
         const { node, color, data_ready, arcGenerator } = this.setupChart();
-    
+        
         select(node)
         .selectAll('path')
         .data(data_ready)
@@ -98,7 +103,7 @@ export default class WantsMeter extends Component<WantsMeterProps, WantsMeterSta
         .attr('text-anchor', 'middle')
         .attr('dy', '0')
         .style('font-size', '20px') 
-        .text(`${Math.trunc((this.state.categories.wants / this.state.total)*100)}%`);
+        .text(`${Math.trunc((this.state.categories.wants / (this.state.categories.wants + this.state.categories.needs))*100)}%`);
 
         select(node)
         .append('text')

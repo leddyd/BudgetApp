@@ -21,7 +21,9 @@ interface ProgressBarProps {
 class ProgressBar extends React.Component<ProgressBarProps> {
   getRemaining(): number {
     const { transactions } = this.props;
-    return transactions.reduce((n, {amount}) => n + amount, 0);
+    return transactions
+    .filter((t) => t.transactionType === "Sent")
+    .reduce((n, { amount }) => n + amount, 0)
   }
 
   render(): JSX.Element {

@@ -3,10 +3,10 @@ import PieChart from '../components/charts/expensePieChart';
 import ProgressBar from '../components/charts/progressBar';
 import AddTransactionModal from '../components/modals/add-transaction';
 import AddSubscriptionModal from '../components/modals/add-subscription';
-import { fetchSubscriptions, fetchTransactions } from '../utils/fetchData'
+import { fetchPlan, fetchSubscriptions, fetchTransactions } from '../utils/fetchData'
 import { getAllMonths, getCurrentMonth } from '../utils/dateUtils';
 import WantsMeter from '../components/charts/wantsMeter';
-import { DocumentData } from 'firebase/firestore';
+import { DocumentData, getDoc } from 'firebase/firestore';
 import { colorScale } from '../utils/constants';
 
 function RenderExpenses() {
@@ -14,7 +14,9 @@ function RenderExpenses() {
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const [displayMonth, setDisplayMonth] = useState(getCurrentMonth);
   const [transactions, setTransactions] = useState<DocumentData[]>([]);
+  const [plan, setPlan] = useState<DocumentData>();
   const [subscriptions, setSubscriptions] = useState<DocumentData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleSubscriptionModal = () => {
     setShowSubscriptionModal(!showSubscriptionModal);
@@ -49,15 +51,47 @@ function RenderExpenses() {
     }
   };
 
+  const getBudget = () => {
+    const income = transactions
+                    .filter((t) => t.transactionType === "Received")
+                    .reduce((n, { amount }) => n + amount, 0)
+    console.log(Math.trunc((plan?.wants / 100) * income))
+    return plan ? Math.trunc((plan.wants / 100) * income) : 0;
+  }
+
+  const getBalance = () => {
+    const bal = transactions
+                  .filter((t) => t.transactionType === "Received")
+                  .reduce((n, { amount }) => n + amount, 0)
+                -
+                transactions
+                  .filter((t) => t.transactionType === "Sent")
+                  .reduce((n, { amount }) => n + amount, 0)
+
+    return bal >= 0 ? `\$${bal.toFixed(2)}` : `-\$${Math.abs(bal).toFixed(2)}`
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const transactionsData = await fetchTransactions();
         const subscriptionsData = await fetchSubscriptions();
+        const planRef = await fetchPlan();
+
+        if (planRef) {
+          const planSnapshot = await getDoc(planRef);
+          if (planSnapshot.exists()) {
+            const planData = planSnapshot.data();
+            setPlan(planData);
+          }
+        }
+
         setTransactions(transactionsData);
         setSubscriptions(subscriptionsData);
       } catch (error) {
         console.error('Error fetching data:', error.message);
+      } finally {
+        setIsLoading(false); 
       }
     };
 
@@ -71,8 +105,8 @@ function RenderExpenses() {
           </div>
           <div className="summary-container hidden">
               <div className="balance-container">
-                  <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your balance</p>
-                  <h2 className="fw-bold">$530,000.50</h2>
+                  <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your month's balance</p>
+                  <h2 className="fw-bold">{getBalance()}</h2>
                   <div className="income-spending-container">
                       <div className="income-container">
                           <small className="fw-medium">
@@ -98,10 +132,14 @@ function RenderExpenses() {
               </div>
               <div className="progress-container">
                   <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Your budget</p>
-                  <ProgressBar budget={250} transactions={transactions} />
+                  <ProgressBar budget={getBudget()} transactions={transactions} />
               </div>
               <div className="meter-container">
+                {isLoading? (
+                  <p></p>
+                ) : (
                   <WantsMeter transactions={transactions} />
+                )}
               </div>
           </div>
           <div className="viz-container">
