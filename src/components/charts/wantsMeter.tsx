@@ -1,22 +1,42 @@
 import React, { RefObject, Component } from 'react';
 import { PieArcDatum, select } from 'd3';
 import * as d3 from 'd3';
+import { DocumentData } from 'firebase/firestore';
+import { needs } from '../../utils/constants';
 
 interface DataEntry {
     key: string;
     value: number;
 }
 
-export default class WantsMeter extends Component<{}, { [key: string]: number }> {
-    private ref: RefObject<SVGGElement>;
-    private currentData: d3.PieArcDatum<DataEntry> | null = null;
+interface WantsMeterProps {
+    transactions: DocumentData[];
+}
 
-    constructor(props: {}) {
+interface WantsMeterState {
+    total: number;
+    categories: {
+      wants: number;
+      needs: number;
+    };
+}
+
+export default class WantsMeter extends Component<WantsMeterProps, WantsMeterState> {
+    private ref: RefObject<SVGGElement>;
+
+    constructor(props: WantsMeterProps) {
         super(props);
         this.ref = React.createRef();
         this.state = {
-            wants: 550,
-            needs: 750,
+            total: props.transactions.reduce((n, { amount }) => n + amount, 0),
+            categories: {
+              wants: props.transactions
+                .filter((t) => !needs.includes(t.category))
+                .reduce((n, { amount }) => n + amount, 0),
+              needs: props.transactions
+                .filter((t) => needs.includes(t.category))
+                .reduce((n, { amount }) => n + amount, 0),
+            },
         };
     }
 
@@ -41,7 +61,7 @@ export default class WantsMeter extends Component<{}, { [key: string]: number }>
             .attr("transform", `translate(${width / 2}, ${height / 1.75})`);
 
         const color: d3.ScaleOrdinal<string, string> = d3.scaleOrdinal<string>()
-            .domain(Object.keys(this.state))
+            .domain(Object.keys(this.state.categories))
             .range(["#FF7F0E", "#8F33FF"]);
 
         const pie = d3.pie<DataEntry>()
@@ -49,7 +69,7 @@ export default class WantsMeter extends Component<{}, { [key: string]: number }>
             .endAngle(Math.PI / 2)
             .value((d: DataEntry) => d.value).sort(null);
 
-        const data_entries: DataEntry[] = Object.entries(this.state).map(([key, value]) => ({ key, value }));
+        const data_entries: DataEntry[] = Object.entries(this.state.categories).map(([key, value]) => ({ key, value })) as DataEntry[];
         const data_ready = pie(data_entries);
 
         const arcGenerator = d3.arc<d3.PieArcDatum<DataEntry>>()
@@ -78,7 +98,7 @@ export default class WantsMeter extends Component<{}, { [key: string]: number }>
         .attr('text-anchor', 'middle')
         .attr('dy', '0')
         .style('font-size', '20px') 
-        .text(`${Math.trunc((this.state.wants / (this.state.wants + this.state.needs))*100)}%`);
+        .text(`${Math.trunc((this.state.categories.wants / this.state.total)*100)}%`);
 
         select(node)
         .append('text')
@@ -90,7 +110,7 @@ export default class WantsMeter extends Component<{}, { [key: string]: number }>
         .text("of your expenses are wants");
     }
     
-    _changeState = (newState: { [key: string]: number }) => {
+    _changeState = (newState: WantsMeterState) => {
         this.setState(newState);
     }
 

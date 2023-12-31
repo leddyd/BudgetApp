@@ -101,7 +101,7 @@ function RenderExpenses() {
                   <ProgressBar budget={250} transactions={transactions} />
               </div>
               <div className="meter-container">
-                  <WantsMeter />
+                  <WantsMeter transactions={transactions} />
               </div>
           </div>
           <div className="viz-container">

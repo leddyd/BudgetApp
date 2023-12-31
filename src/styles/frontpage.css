@@ -16,7 +16,7 @@
 }
 
 .home-card {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     transition: opacity .5s ease-in-out, transform 0.5s ease-in-out;
     transform: translateX(-25px);
     opacity: 0;
