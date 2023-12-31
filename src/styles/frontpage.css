@@ -129,3 +129,7 @@ input[type=submit]:hover {
 .home-header-container {
     width: 50%;
 }
+
+.footer {
+   margin-top: 40px;
+}

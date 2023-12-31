@@ -68,7 +68,7 @@ import { db } from '../../config/firebaseConfig.ts';
           email: user.email,
         });
 
-        navigate('/profile', { replace: true });
+        navigate('/expenses', { replace: true });
   
         console.log("Document written with ID: info");
 
