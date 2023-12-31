@@ -1,4 +1,4 @@
-# WeGonBudget
+# Distant Dollar
 Web development project for tracking and minimizing expenses using typescript (react + vite), d3, and firebase.
 
 # Package Dependencies
