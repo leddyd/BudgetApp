@@ -54,7 +54,7 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
   barTransition() {
     const { transactions, xScale, budget } = this.props;
     const t = transition().duration(800);
-    const total = transactions.reduce((n, {amount}) => n + amount, 0);;
+    const total = transactions.reduce((n, {amount}) => n + amount, 0);
 
     select('.bar')
       .transition(t)
@@ -64,7 +64,7 @@ class ExpenditureBar extends React.Component<ExpenditureBarProps> {
     select('.amount')
       .transition(t)
       .attr('x', xScale(Math.min(total, budget)))
-      .text(`${total} of ${budget} spent`);
+      .text(`\$${total} of \$${budget} spent`);
   }
 
   render() {

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import { DocumentData } from 'firebase/firestore';
+import { colorScale } from '../../utils/constants';
 
 interface Datum {
   label: string;
@@ -7,18 +9,42 @@ interface Datum {
 }
 
 interface PieChartProps {
-  data: Datum[];
+  data: DocumentData[];
   width: number;
   height: number;
+}
+
+interface CategoryDict {
+  [category: string]: number;
 }
 
 const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [arcData, setArcData] = useState<d3.PieArcDatum<Datum>[]>([]);
+ 
+  const formatData = () => {
+    const dict: CategoryDict = {};
+    let total = 0;
+    
+    for (const d of data.filter((d) => d.category !== 'NA')) {
+      const { category, amount } = d;
+      dict[category] = (dict[category] ?? 0) + amount;
+      total += amount;
+    }
+  
+    const out = Object.keys(dict).map((category) => ({
+      label: category,
+      value: dict[category] / total,
+    }));
+  
+    return out;
+  };
+  
 
+  const formattedData = formatData();
   useEffect(() => {
     const pie = d3.pie<Datum>().value((d) => d.value);
-    const arcs = pie(data);
+    const arcs = pie(formattedData);
 
     setArcData(arcs);
 
@@ -35,11 +61,11 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
       .enter()
       .append('path')
       .attr('data-bs-toggle', 'tooltip')
-      .attr('data-bs-title', '32%')
+      .attr('data-bs-title', (d) => `${d.data.value * 100}%`)
       .attr('data-bs-placement', 'top')
       .attr('data-bs-custom-class', 'custom-tooltip')
       .attr('d', arc)
-      .attr('fill', (_, i) => d3.schemeCategory10[i])
+      .attr('fill', (d) => colorScale(d.data.label) as string)
       .on('mouseover', function (_, d) {
         this.parentNode.appendChild(this);
         d3.select(this).style('stroke', 'black').style('stroke-width', 2);
@@ -55,7 +81,7 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
       });
 
     const legendG = svg.selectAll(".legend")
-      .data(pie(data))
+      .data(pie(formattedData))
       .enter().append("g")
       .attr('transform', function (d, i) {
         return `translate(${0}, ${i * 20 + 20})`;
@@ -66,7 +92,7 @@ const PieChart: React.FC<PieChartProps> = ({ data, width, height }) => {
       .attr("width", 8)
       .attr("height", 8)
       .attr("rx", 50)
-      .attr("fill", (_, i) => d3.schemeCategory10[i])
+      .attr('fill', (d) => colorScale(d.data.label) as string)
       
     legendG.append("text")
       .text(function(d){

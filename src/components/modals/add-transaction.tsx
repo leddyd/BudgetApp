@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Dropdown } from 'react-bootstrap';
 import { addDoc, collection } from 'firebase/firestore'; 
 import { db, auth } from '../../config/firebaseConfig.ts'; 
+import { expenseCategories } from '../../utils/constants.tsx';
 
 interface AddTransactionModalProps {
     onClose: () => void;
@@ -11,6 +12,7 @@ interface AddTransactionModalProps {
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, onTransactionAdded }) => {
     const [note, setNote] = useState('');
     const [transactionType, setTransactionType] = useState('Sent');
+    const [category, setCategory] = useState('Expense category');
     const [amount, setAmount] = useState('');
 
     const handleSave = async () => {
@@ -22,10 +24,11 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, onTr
                 console.error('User not authenticated');
                 return;
             }
-
+            
             const docRef = await addDoc(collection(db, `users/${userId}/transactions`), {
                 note,
                 transactionType,
+                category,
                 amount: parseFloat(amount),
                 createdAt: new Date(),
             });
@@ -74,6 +77,20 @@ const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, onTr
                     <span className="input-group-text">$</span>
                     <span className="input-group-text">0.00</span>
                 </div>
+                {
+                    transactionType === 'Sent' &&
+                    <Dropdown>
+                        <Dropdown.Toggle variant="outline-secondary" className="">
+                            {category}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            {expenseCategories.map((category, index) => (
+                                <Dropdown.Item key={index} onClick={() => setCategory(category)}>{category}</Dropdown.Item>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                }
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>Close</Button>

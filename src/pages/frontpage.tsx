@@ -47,7 +47,7 @@ function RenderFrontPage() {
         <div id="home">
             <div className="home-header-container" id="features-header">
                 <div>
-                    <p>PERSONAL FINANCE WITH WEGONBUDGET</p>
+                    <p>PERSONAL FINANCE WITH DISTANT DOLLAR</p>
                     <h1>MAKE A CHANGE</h1>
                 </div>
             </div>

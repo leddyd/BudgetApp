@@ -36,7 +36,7 @@ function RenderNonUserNavbar() {
             onMouseEnter={() => ChangeIcon('.bi-wallet', 'bi-wallet', 'bi-wallet2')} 
             onMouseLeave={() => ChangeIcon('.bi-wallet2', 'bi-wallet2', 'bi-wallet')}>
             <i className="bi-wallet d-inline-block align-text-top"></i>
-            WeGonBudget
+            Distant Dollar
           </Link>
           <ul className="nav nav-pills">
             {pills.map((pill, index) => (

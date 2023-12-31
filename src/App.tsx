@@ -8,7 +8,7 @@ import RenderFrontPage from "./pages/frontpage";
 import RenderLogin from "./components/auth/login";
 import RenderSignUp from "./components/auth/signup";
 import RenderUserNavbar from "./components/user-navbar";
-import RenderExpenses from "./pages/expenses";
+import RenderExpenses from "./pages/dashboard";
 import RenderGoals from "./pages/goals";
 import RenderAchievements from "./pages/achievements";
 import { AuthProvider } from "./components/auth/auth";

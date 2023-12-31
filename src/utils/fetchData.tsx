@@ -11,7 +11,7 @@ export const fetchTransactions = async (): Promise<DocumentData[]> => {
   
       const transactionsSnapshot = await getDocs(transactionsQuery);
       const transactionsData = transactionsSnapshot.docs.map((doc) => doc.data());
-  
+      
       return transactionsData;
     } catch (error) {
       console.error('Error fetching transactions:', error.message);
