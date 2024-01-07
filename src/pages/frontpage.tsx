@@ -83,7 +83,7 @@ function RenderFrontPage() {
                     <div className="hover-bar"></div>
                     <img src="https://media.licdn.com/dms/image/D4E03AQFbGrNlhV3vOQ/profile-displayphoto-shrink_100_100/0/1701894420208?e=1708560000&v=beta&t=cqzMonxSXKY2KGL_ASbSb62XIhoMLf91ee-lOQpaRas"/>
                     <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Blake Prall<i className="bi bi-chevron-right"></i></p>
-                    <p>A description</p>
+                    <p>Blake is majoring in computer science and neuroscience. He is particularly interested in full stack web development as well as deep learning applications and implementation. Blake was responsible in integrating the back end components and assisting in front end development.</p>
                 </div>
             </div>
             <div className="footer">This is a global notification bar</div>
