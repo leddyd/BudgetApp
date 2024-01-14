@@ -12,7 +12,7 @@ interface AddTransactionModalProps {
 const AddTransactionModal: React.FC<AddTransactionModalProps> = ({ onClose, onTransactionAdded }) => {
     const [note, setNote] = useState('');
     const [transactionType, setTransactionType] = useState('Sent');
-    const [category, setCategory] = useState('Expense category');
+    const [category, setCategory] = useState('Expense Category');
     const [amount, setAmount] = useState('');
 
     const handleSave = async () => {

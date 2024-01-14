@@ -75,7 +75,7 @@ function RenderFrontPage() {
             <div id="about">
                 <div className="about-card" onClick={() => directToPage("https://www.linkedin.com/in/dylan-leddy-298a71223")}>
                     <div className="hover-bar"></div>
-                    <img src="https://media.licdn.com/dms/image/C4E03AQFmMnB8gkDt6Q/profile-displayphoto-shrink_400_400/0/1634930548034?e=1708560000&v=beta&t=EKGiqfDBto5m2In56lN0sXRI0C89vH8q-Xjog1jWcFk"/>
+                    <img src="https://media.licdn.com/dms/image/D4E03AQH6OASK8wsN_g/profile-displayphoto-shrink_800_800/0/1705167024061?e=1710979200&v=beta&t=CWcKZM9oFsYGnUcYz9NQThLIzupFtJ-PVcrwqGsZ1T8"/>
                     <p className="mb-0 fs-5 text-body-emphasis fw-medium text-muted">Dylan Leddy<i className="bi bi-chevron-right"></i></p>
                     <p>Dylan studies computer science and finance. He is interested in software development, investments, and machine learning. Dylan was responsible for designing Distant Dollar's front end components and implementing D3 visualizations.</p>
                 </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Dropdown } from 'react-bootstrap';
 import { addDoc, collection } from 'firebase/firestore'; 
-import { db, auth } from '../../config/firebaseConfig.ts'; 
+import { db, auth } from '../../config/firebaseConfig.ts';
+import { subscriptionFrequencies } from '../../utils/constants.tsx'; 
 
 interface AddSubscriptionModalProps {
   onClose: () => void;
@@ -10,6 +11,7 @@ interface AddSubscriptionModalProps {
 
 const AddSubscriptionModal: React.FC<AddSubscriptionModalProps> = ({ onClose,  onSubscriptionAdded}) => {
   const [note, setNote] = useState('');
+  const [frequency, setFrequency] = useState('Frequency');
   const [amount, setAmount] = useState('');
 
   const handleSave = async () => {
@@ -25,6 +27,7 @@ const AddSubscriptionModal: React.FC<AddSubscriptionModalProps> = ({ onClose,  o
       const docRef = await addDoc(collection(db, `users/${userId}/subscriptions`), {
         note,
         amount: parseFloat(amount), 
+        frequency,
         createdAt: new Date(),
       });
 
@@ -65,6 +68,19 @@ const AddSubscriptionModal: React.FC<AddSubscriptionModalProps> = ({ onClose,  o
               setAmount(e.target.value);
             }}
           />
+        </div>
+        <div>
+          <Dropdown>
+            <Dropdown.Toggle variant="outline-secondary" className="">
+              {frequency}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {subscriptionFrequencies.map((frequency, index) => (
+              <Dropdown.Item key={index} onClick={() => setFrequency(frequency)}>{frequency}</Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </Modal.Body>
       <Modal.Footer>

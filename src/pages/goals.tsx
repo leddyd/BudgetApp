@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddGoalModal from "../components/modals/add-goal";
-import { addDoc, collection, getDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../config/firebaseConfig";
-import { fetchPlan } from "../utils/fetchData";
 
 function RenderGoals() {
     const [debtValue, setDebtValue] = useState(25);
@@ -10,34 +7,10 @@ function RenderGoals() {
     const [needsValue, setNeedsValue] = useState(25);
     const [wantsValue, setWantsValue] = useState(25);
     const [showGoalModal, setShowGoalModal] = useState(false);
-
-    const handleSaveChanges = async () => {
-        try {
-            const userId = auth.currentUser?.uid;
-            if (!userId) {
-                console.error('User not authenticated');
-                return;
-            }
-            
-            const planRef = await fetchPlan();
-            if (planRef) {
-                await updateDoc(planRef, {
-                    debt: debtValue,
-                    savings: savingsValue,
-                    needs: needsValue,
-                    wants: wantsValue
-                });
-            }
-
-            console.log("Plan added successfully");
-        } catch (error) {
-            console.error("Error adding plan: ", error);
-        }
-    };
     
     const handleDebtChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newValue = parseInt(e.target.value);
-        let maxValue = 100 - needsValue - wantsValue - savingsValue;
+        const newValue = parseInt(e.target.value);
+        const maxValue = 100 - needsValue - wantsValue - savingsValue;
 
         if (maxValue - newValue < 0) {
             setDebtValue(maxValue);
@@ -47,9 +20,9 @@ function RenderGoals() {
     };
 
     const handleSavingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newValue = parseInt(e.target.value);
-        let maxValue = 100 - needsValue - wantsValue - debtValue;
-        
+        const newValue = parseInt(e.target.value);
+        const maxValue = 100 - needsValue - wantsValue - debtValue;
+
         if (maxValue - newValue < 0) {
             setSavingsValue(maxValue);
         } else {
@@ -58,8 +31,8 @@ function RenderGoals() {
     };
 
     const handleNeedsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newValue = parseInt(e.target.value);
-        let maxValue = 100 - savingsValue - wantsValue - debtValue;
+        const newValue = parseInt(e.target.value);
+        const maxValue = 100 - savingsValue - wantsValue - debtValue;
 
         if (maxValue - newValue < 0) {
             setNeedsValue(maxValue);
@@ -76,8 +49,8 @@ function RenderGoals() {
     }
 
     const handleWantsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newValue = parseInt(e.target.value);
-        let maxValue = 100 - needsValue - savingsValue - debtValue;
+        const newValue = parseInt(e.target.value);
+        const maxValue = 100 - needsValue - savingsValue - debtValue;
 
         if (maxValue - newValue < 0) {
             setWantsValue(maxValue);
@@ -90,46 +63,6 @@ function RenderGoals() {
         setShowGoalModal(!showGoalModal);
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const userId = auth.currentUser?.uid;
-                if (!userId) {
-                    console.error('User not authenticated');
-                    return;
-                }
-    
-                const latestDebtValue = debtValue;
-                const latestSavingsValue = savingsValue;
-                const latestNeedsValue = needsValue;
-                const latestWantsValue = wantsValue;
-    
-                const planRef = await fetchPlan();
-                if (planRef) {
-                    const planSnapshot = await getDoc(planRef);
-                    if (planSnapshot.exists()) {
-                        const planData = planSnapshot.data();
-                        setDebtValue(planData.debt);
-                        setSavingsValue(planData.savings);
-                        setNeedsValue(planData.needs);
-                        setWantsValue(planData.wants);
-                    } else {
-                        await addDoc(collection(db, `users/${userId}/plan`), {
-                            debt: latestDebtValue,
-                            savings: latestSavingsValue,
-                            needs: latestNeedsValue,
-                            wants: latestWantsValue
-                        });
-                    }
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error.message);
-            }
-        };
-    
-        fetchData();
-    }, []);
-    
     return (
         <div className="app-page-container">
             <div className="header-container hidden">
@@ -143,73 +76,34 @@ function RenderGoals() {
                         </div>
                     </div>
                     <div className="card-content-wrapper">
-                        <label htmlFor="income-field" className="form-label">This Month's Income</label>
+                        <label htmlFor="income-field" className="form-label">After-Tax Monthly Income</label>
                         <div className="input-group mb-4">
                             <span className="input-group-text">$</span>
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                value={0} 
-                                aria-label="Amount (to the nearest dollar)" 
-                                id="income-field"
-                                readOnly
-                            />
+                            <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" id="income-field"/>
                             <span className="input-group-text">.00</span>
                         </div>
                         <label htmlFor="debt-slider" className="form-label mt-4">
                             Debt
                             <span className="slider-value">{debtValue}%</span>
                         </label>
-                        <input 
-                            type="range" 
-                            className="form-range" 
-                            id="debt-slider" 
-                            step="1" 
-                            value={debtValue} 
-                            onChange={handleDebtChange}
-                            onMouseUp={handleSaveChanges}
-                        />
+                        <input type="range" className="form-range" id="debt-slider" step="1" value={debtValue} onChange={handleDebtChange}></input>
                         <label htmlFor="savings-slider" className="form-label">
                             Savings
                             <span className="slider-value">{savingsValue}%</span>
                         </label>
-                        <input 
-                            type="range" 
-                            className="form-range" 
-                            id="savings-slider" 
-                            step="1" 
-                            value={savingsValue} 
-                            onChange={handleSavingsChange}
-                            onMouseUp={handleSaveChanges}
-                        />
+                        <input type="range" className="form-range" id="savings-slider" step="1" value={savingsValue} onChange={handleSavingsChange}></input>
                         <label htmlFor="needs-slider" className="form-label">
                             Needs
                             <span className="slider-value">{needsValue}%</span>
                         </label>
-                        <input 
-                            type="range" 
-                            className="form-range" 
-                            id="needs-slider" 
-                            step="1" 
-                            value={needsValue} 
-                            onChange={handleNeedsChange}
-                            onMouseUp={handleSaveChanges}
-                        />
+                        <input type="range" className="form-range" id="needs-slider" step="1" value={needsValue} onChange={handleNeedsChange}></input>
                         <label htmlFor="wants-slider" className="form-label">
                             Wants
                             <span className="slider-value">{wantsValue}%</span>
                         </label>
-                        <input 
-                            type="range" 
-                            className="form-range mb-4" 
-                            id="wants-slider" 
-                            step="1" 
-                            value={wantsValue} 
-                            onChange={handleWantsChange}
-                            onMouseUp={handleSaveChanges}
-                        />
+                        <input type="range" className="form-range mb-4  " id="wants-slider" step="1" value={wantsValue} onChange={handleWantsChange}></input>
                     </div>
-                    <button className="auto-plan text-link" onMouseUp={handleSaveChanges} onClick={autoApplyPlan}><i className="bi bi-check2-square"></i>Apply our suggested plan</button>
+                    <button className="auto-plan text-link" onClick={autoApplyPlan}><i className="bi bi-check2-square"></i>Apply our suggested plan</button>
                 </div>
                 <div className="objective-card objectives hidden">
                     <div className='navbar navbar-expand-lg bg-body-tertiary rounded-top-3'>

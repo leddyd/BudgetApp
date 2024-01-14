@@ -23,6 +23,16 @@ export const needs = [
     "Debt Repayment",
 ]
 
+export const subscriptionFrequencies = [
+    "Weekly",
+    "Bi-weekly",
+    "Monthly",
+    "Quarterly",
+    "Bi-Yearly",
+    "Yearly"
+] 
+
+
 export const colorScale = d3.scaleOrdinal()
     .domain(Object.keys(expenseCategories))
     .range(d3.schemeCategory10);
