@@ -1,4 +1,4 @@
-# Distant Dollar
+# [Distant Dollar](https://budgetapp-8ac58.web.app/)
 Web development project for tracking and minimizing expenses using typescript (react + vite), d3, and firebase.
 
 # Package Dependencies
